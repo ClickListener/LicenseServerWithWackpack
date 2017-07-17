@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <form class="simple_form form-signIn" novalidate="novalidate" id="new_user"
+                  accept-charset="UTF-8">
+
+                <input name="utf8" type="hidden" value="✓">
+                <input type="hidden" name="authenticity_token"
+                       value="KN2pVkuqWVxYHV0osSVKJadEtyLDuKXNv8t7k8RyGkx/O8J7Cn3eHh/Mm4waA/16GXdXVCeRB5gwRHOEzU+1qA==">
+
+                <h2 class="text-center header-state">Sign in</h2>
+
+
+                <div class="error"></div>
+                <div class="md-form">
+                    <input required="required" class="form-control" id="email" type="text">
+                    <label for="email">Email</label>
+
+                </div>
+
+                <div class="md-form">
+                    <input required="required" class="form-control" id="password" type="password">
+                    <label for="password">Password</label>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+
+            </form>
+            <div class="text-center">
+                <br>
+
+                <a routerLink="/sign-up">Sign up</a><br>
+
+                <a>Forgot your password?</a><br>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

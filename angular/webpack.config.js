@@ -1,18 +1,20 @@
 /**
  * Created by zhangxu on 2017/6/30.
  */
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const helper = require('./config/helpers');
 
 
 module.exports = {
     devtool: 'source-map',//Choose a style of source mapping to enhance the debugging process. These values can affect build and rebuild speed dramatically.
 
-    entry: './src/main.ts',
+    entry: helper.root('src','main.ts'),
 
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: helper.root('dist')
     },
 
     module: {
@@ -24,8 +26,13 @@ module.exports = {
             {
                 test:/\.html$/,
                 loader: 'html-loader',
-                exclude: './src/index.html'
+                exclude: helper.root('src','index.html')
 
+            },
+            {
+                test:/\.css$/,
+                loader:'raw-loader' //第二个模式过滤器是给组件局部样式的，并通过raw加载器把它们加载成字符串
+                                    // —— 那是Angular期望通过元数据的styleUrls属性来指定样式的形式。
             }
         ],
 
@@ -36,7 +43,7 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'    //在dist文件夹生成index.html   并且将对应的
+            template: helper.root('src','index.html')   //在dist文件夹生成index.html   并且将对应的
         })
     ]
 
