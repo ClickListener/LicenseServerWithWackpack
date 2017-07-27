@@ -1,9 +1,12 @@
 /**
  * Created by zhangxu on 2017/7/2.
  */
-import 'core-js';
-import 'reflect-metadata';
-import 'zone.js/dist/zone';
+
+
+import 'mdbootstrap/css/bootstrap.css';
+import 'mdbootstrap/css/mdb.css';
+import 'mdbootstrap/css/style.css'
+
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 

@@ -16,6 +16,8 @@ var app_routing_module_1 = require("./app-routing.module");
 var sign_in_component_1 = require("./components/user/user_signIn/sign-in.component");
 var sign_up_component_1 = require("./components/user/user_signUp/sign-up.component");
 var home_component_1 = require("./components/home/home.component");
+var user_service_1 = require("./services/user.service");
+var http_1 = require("@angular/http");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -25,7 +27,9 @@ AppModule = __decorate([
     core_1.NgModule({
         imports: [
             platform_browser_1.BrowserModule,
-            app_routing_module_1.AppRoutingModule
+            app_routing_module_1.AppRoutingModule,
+            http_1.HttpModule,
+            http_1.JsonpModule
         ],
         declarations: [
             app_component_1.AppComponent,
@@ -33,7 +37,8 @@ AppModule = __decorate([
             sign_up_component_1.SignUpComponent,
             home_component_1.HomeComponent
         ],
-        bootstrap: [app_component_1.AppComponent]
+        bootstrap: [app_component_1.AppComponent],
+        providers: [user_service_1.UserService]
     })
 ], AppModule);
 exports.AppModule = AppModule;
