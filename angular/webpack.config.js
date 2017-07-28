@@ -18,7 +18,7 @@ module.exports = {
     entry: {
         'polyfills': helper.root('src', 'polyfills.ts'),
         'vendor': [
-            'tether', 'jquery', 'bootstrap', 'mdb'
+            helper.root('src', 'vendor.ts'), 'tether', 'jquery', 'bootstrap', 'mdb'
         ],
         'main' : helper.root('src','main.ts')
     },
@@ -77,10 +77,45 @@ module.exports = {
     },
 
     plugins: [
-        new HtmlWebpackPlugin({
-            template: helper.root('src','index.html')   //在dist文件夹生成index.html   并且将对应的
+
+        /**
+         * 如果出错就停止构建
+         */
+        new webpack.NoEmitOnErrorsPlugin(),
+
+        /**
+         * 最小化生成的包
+         */
+        new webpack.optimize.UglifyJsPlugin({ // https://github.com/angular/angular/issues/10618
+            mangle: {
+                keep_fnames: true
+            }
         }),
 
+        /**
+         * fix WARNING in ./~/@angular/core/@angular/core.es5.js.
+         * stackOverFlow: https://stackoverflow.com/questions/44403401/error-in-webpack-when-compiling-for-angular-4
+         */
+        // Workaround for angular/angular#11580
+        new webpack.ContextReplacementPlugin(
+            // The (\\|\/) piece accounts for path separators in *nix and Windows
+            /angular(\\|\/)core(\\|\/)@angular/,
+            helper.root('./src'), // location of your src
+            {} // a map of your routes
+        ),
+
+        /**
+         * 在dist文件夹生成index.html，并根据filename, publicPath在index.html文件插入<link>和<script>
+         */
+        new HtmlWebpackPlugin({
+            template: helper.root('src','index.html')
+        }),
+
+        /**
+         * Automatically load modules instead of having to import or require them everywhere.
+         *
+         * By the way, the bootstrap 4 need tether plugin.
+         */
         new ProvidePlugin({
             $ : 'jquery',
             jquery: "jquery",
@@ -90,6 +125,9 @@ module.exports = {
 
         }),
 
+        /**
+         * 把内嵌的css抽取成外部文件，并为其文件名添加“缓存无效哈希”。
+         */
         new webpack.optimize.CommonsChunkPlugin({
             name : ['main', 'vendor', 'polyfills']
         }),
@@ -105,6 +143,10 @@ module.exports = {
 
 
 
+        /**
+         * 为特定的加载器提供选项。 (当时遇到的问题是： 在DOM中，除了class属性之外，其他标签打包完，""都会消失，
+         * 比如routerLink = "/signIn",在打包完为router = /signIn  )
+         */
         new webpack.LoaderOptionsPlugin({
             debug: false,
             options: {

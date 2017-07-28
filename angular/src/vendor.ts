@@ -19,6 +19,8 @@ import 'zone.js/dist/zone';
 
 
 
-
+import 'mdbootstrap/css/bootstrap.css';
+import 'mdbootstrap/css/mdb.css';
+import 'mdbootstrap/css/style.css'
 
 
