@@ -83,14 +83,14 @@ module.exports = {
          */
         new webpack.NoEmitOnErrorsPlugin(),
 
-        /**
-         * 最小化生成的包
-         */
-        new webpack.optimize.UglifyJsPlugin({ // https://github.com/angular/angular/issues/10618
-            mangle: {
-                keep_fnames: true
-            }
-        }),
+        // /**
+        //  * 最小化生成的包
+        //  */
+        // new webpack.optimize.UglifyJsPlugin({ // https://github.com/angular/angular/issues/10618
+        //     mangle: {
+        //         keep_fnames: true
+        //     }
+        // }),
 
         /**
          * fix WARNING in ./~/@angular/core/@angular/core.es5.js.

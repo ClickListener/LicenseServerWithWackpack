@@ -12,13 +12,6 @@ import '@angular/router';
 // RxJS
 import 'rxjs';
 
-import 'core-js/es6';
-import 'core-js/es7/reflect';
-import 'reflect-metadata';
-import 'zone.js/dist/zone';
-
-
-
 import 'mdbootstrap/css/bootstrap.css';
 import 'mdbootstrap/css/mdb.css';
 import 'mdbootstrap/css/style.css'
