@@ -1,0 +1,8 @@
+{
+  "name": "bootstrap",
+  "version": "0.0.1",
+  "description": "webpack angular code, and copy it into server public file, then run the Server",
+  "scripts": {
+    "build": "cd angular && npm run build:prod && cp -rf dist ../server/dist && cd ../server && npm start"
+  }
+}
