@@ -18,6 +18,7 @@ var sign_up_component_1 = require("./components/user/user_signUp/sign-up.compone
 var home_component_1 = require("./components/home/home.component");
 var user_service_1 = require("./services/user.service");
 var http_1 = require("@angular/http");
+var forms_1 = require("@angular/forms");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -29,7 +30,8 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             app_routing_module_1.AppRoutingModule,
             http_1.HttpModule,
-            http_1.JsonpModule
+            http_1.JsonpModule,
+            forms_1.FormsModule,
         ],
         declarations: [
             app_component_1.AppComponent,

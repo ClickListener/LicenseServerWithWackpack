@@ -21,10 +21,11 @@ var UserService = (function () {
         this.jsonp = jsonp;
     }
     UserService.prototype.signIn = function (userInfo) {
-        return this.http.post('/api/auth/signIn', userInfo)
-            .toPromise()
-            .then(function (res) { return res.json(); })
-            .catch(function (res) { return res.json(); });
+        var url = '/signIn';
+        console.log(JSON.stringify(userInfo));
+        this.http.post(url, JSON.stringify(userInfo), { headers: new http_1.Headers({ 'Content-Type': 'application/json' }) }).subscribe(function (res) {
+            console.log(JSON.stringify(res) + "status = " + res.status);
+        });
     };
     return UserService;
 }());

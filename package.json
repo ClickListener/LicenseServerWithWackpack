@@ -3,6 +3,6 @@
   "version": "0.0.1",
   "description": "webpack angular code, and copy it into server public file, then run the Server",
   "scripts": {
-    "build": "cd angular && npm run build:prod && cp -rf dist ../server/dist && cd ../server && npm start"
+    "build": "cd angular && npm run build && cd ../server && rm -r dist && cp -rf ../angular/dist server && cd ../server && npm start"
   }
 }

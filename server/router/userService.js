@@ -10,10 +10,11 @@ const router = express.Router();
  * 登录
  */
 
-router.post('/api/auth/signIn', function (req, res) {
+router.post('/signIn', function (req, res) {
+    console.log(req.body);
     res.json({
-        name: req.name,
-        password: req.password
+        email: req.body.email,
+        password: req.body.password
     })
 });
 

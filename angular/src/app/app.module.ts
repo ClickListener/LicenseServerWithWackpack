@@ -10,6 +10,7 @@ import {SignUpComponent} from "./components/user/user_signUp/sign-up.component";
 import {HomeComponent} from "./components/home/home.component";
 import {UserService} from "./services/user.service";
 import {HttpModule, JsonpModule} from "@angular/http";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
 
@@ -17,7 +18,8 @@ import {HttpModule, JsonpModule} from "@angular/http";
         BrowserModule,
         AppRoutingModule,
         HttpModule,
-        JsonpModule
+        JsonpModule,
+        FormsModule,
 
     ],
     declarations:[

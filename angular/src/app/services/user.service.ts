@@ -4,9 +4,10 @@
 
 
 import {Injectable} from "@angular/core";
-import {Http, Jsonp} from "@angular/http";
+import {Http, Jsonp, Headers} from "@angular/http";
 
 import 'rxjs/add/operator/toPromise';
+
 @Injectable()
 export class UserService {
 
@@ -14,10 +15,11 @@ export class UserService {
 
     }
 
-    signIn(userInfo : any) : Promise<any> {
-        return this.http.post('/api/auth/signIn', userInfo)
-            .toPromise()
-            .then(res => res.json())
-            .catch(res => res.json())
+    signIn(userInfo : any) : void {
+        const url = '/signIn';
+        console.log(JSON.stringify(userInfo));
+        this.http.post(url, JSON.stringify(userInfo), {headers: new Headers({'Content-Type': 'application/json'})}).subscribe(function (res) {
+                console.log(JSON.stringify(res) + "status = " + res.status);
+            });
     }
 }
