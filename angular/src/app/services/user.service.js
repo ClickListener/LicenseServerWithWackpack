@@ -14,24 +14,53 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-require("rxjs/add/operator/toPromise");
-var UserService = (function () {
-    function UserService(http, jsonp) {
+var UserService = UserService_1 = (function () {
+    function UserService(http) {
         this.http = http;
-        this.jsonp = jsonp;
+        this.header = {
+            headers: new http_1.Headers({ 'Content-Type': 'application/json' })
+        };
     }
+    /**
+     * 登录服务
+     * @param userInfo
+     */
     UserService.prototype.signIn = function (userInfo) {
-        var url = '/signIn';
+        var url = '/api/auth/signin';
         console.log(JSON.stringify(userInfo));
-        this.http.post(url, JSON.stringify(userInfo), { headers: new http_1.Headers({ 'Content-Type': 'application/json' }) }).subscribe(function (res) {
-            console.log(JSON.stringify(res) + "status = " + res.status);
-        });
+        return this.http.post(url, JSON.stringify(userInfo), this.header)
+            .toPromise()
+            .then(function (res) {
+            console.log("res.json = " + JSON.stringify(res.json()));
+            return res.json();
+        })
+            .catch(UserService_1.handleError);
+    };
+    /**
+     * 注册服务
+     * @param userInfo
+     *
+     */
+    UserService.prototype.signUp = function (userInfo) {
+        var url = '/api/auth/signup';
+        console.log(JSON.stringify(userInfo));
+        return this.http.post(url, JSON.stringify(userInfo), this.header)
+            .toPromise()
+            .then(function (res) {
+            console.log("res.json() = " + res.json());
+        })
+            .catch(UserService_1.handleError);
+    };
+    UserService.handleError = function (error) {
+        console.log('An error occurred', JSON.stringify(error)); //for demo purposes only
+        return Promise.reject(error.message || error);
     };
     return UserService;
 }());
-UserService = __decorate([
+UserService = UserService_1 = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, http_1.Jsonp])
+    __metadata("design:paramtypes", [http_1.Http])
 ], UserService);
 exports.UserService = UserService;
+var UserService_1;
 //# sourceMappingURL=user.service.js.map

@@ -10,7 +10,7 @@ require("@angular/core");
 require("@angular/common");
 require("@angular/http");
 require("@angular/router");
-// RxJS
+// RxJS   Reactive Extensions
 require("rxjs");
 require("mdbootstrap/css/bootstrap.css");
 require("mdbootstrap/css/mdb.css");

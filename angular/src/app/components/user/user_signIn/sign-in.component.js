@@ -14,13 +14,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 var user_service_1 = require("../../../services/user.service");
+var router_1 = require("@angular/router");
 var SignInComponent = (function () {
-    function SignInComponent(userService) {
+    function SignInComponent(userService, router) {
         this.userService = userService;
+        this.router = router;
     }
     SignInComponent.prototype.signIn = function (email, password) {
+        var _this = this;
         console.log('email = ' + email + " password = " + password);
-        this.userService.signIn({ "email": email, "password": password });
+        this.userService.signIn({ "email": email, "password": password })
+            .then(function (res) {
+            _this.user = res;
+            // this.user.user = JSON.stringify(res);
+            // this.user.email = res.email;
+            // this.user.licenses = JSON.stringify(res.licenses);
+            console.log("email = " + JSON.stringify(_this.user.email));
+            console.log("totalUserNumber = " + JSON.stringify(_this.user.licenses[0].totalUserNumber));
+            console.log("devices = " + JSON.stringify(_this.user.licenses[0].devices));
+            alert("登录成功");
+            _this.router.navigate(['/']);
+        })
+            .catch(function (error) {
+            console.log("error = " + JSON.stringify(error));
+        });
     };
     return SignInComponent;
 }());
@@ -30,7 +47,7 @@ SignInComponent = __decorate([
         templateUrl: './sign-in.component.html',
         styleUrls: ['sign-in.component.css']
     }),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [user_service_1.UserService, router_1.Router])
 ], SignInComponent);
 exports.SignInComponent = SignInComponent;
 //# sourceMappingURL=sign-in.component.js.map

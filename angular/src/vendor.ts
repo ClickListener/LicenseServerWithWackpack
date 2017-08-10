@@ -9,7 +9,7 @@ import '@angular/common';
 import '@angular/http';
 import '@angular/router';
 
-// RxJS
+// RxJS   Reactive Extensions
 import 'rxjs';
 
 import 'mdbootstrap/css/bootstrap.css';
