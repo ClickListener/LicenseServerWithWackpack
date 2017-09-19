@@ -15,13 +15,15 @@ export class UserService {
 
     }
 
+    user: User;
+
     private header = {
         headers: new Headers({'Content-Type': 'application/json'})
     };
 
 
     /**
-     * 登录服务
+     * 登录服务3
      * @param userInfo
      */
     signIn(userInfo : any) : Promise<User> {
@@ -32,6 +34,7 @@ export class UserService {
             .toPromise()
             .then(res => {
                 console.log("res.json = " + JSON.stringify(res.json()));
+                this.user = res.json() as User;
                return res.json() as User;
             })
             .catch(UserService.handleError)

@@ -22,16 +22,18 @@ var UserService = UserService_1 = (function () {
         };
     }
     /**
-     * 登录服务
+     * 登录服务3
      * @param userInfo
      */
     UserService.prototype.signIn = function (userInfo) {
+        var _this = this;
         var url = '/api/auth/signin';
         console.log(JSON.stringify(userInfo));
         return this.http.post(url, JSON.stringify(userInfo), this.header)
             .toPromise()
             .then(function (res) {
             console.log("res.json = " + JSON.stringify(res.json()));
+            _this.user = res.json();
             return res.json();
         })
             .catch(UserService_1.handleError);
