@@ -4,7 +4,7 @@
   "description": "This is the server that built by Express and MongoDB.",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "rimraf dist && cp -r ../angular/dist dist && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Zhangxu",
@@ -13,5 +13,8 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "mongodb": "^2.2.29"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2"
   }
 }
