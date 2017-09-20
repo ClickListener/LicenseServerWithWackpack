@@ -11,6 +11,9 @@ import {HomeComponent} from "./components/home/home.component";
 import {UserService} from "./services/user.service";
 import {HttpModule, JsonpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
+import {CreateNewComponent} from "./components/license/license_createNew/createNew.component";
+import {ManagerComponent} from "./components/license/license_manager/manager.component";
+import {ModifyComponent} from "./components/license/license_modify/modify.component";
 
 @NgModule({
 
@@ -26,7 +29,10 @@ import {FormsModule} from "@angular/forms";
         AppComponent,
         SignInComponent,
         SignUpComponent,
-        HomeComponent
+        HomeComponent,
+        CreateNewComponent,
+        ManagerComponent,
+        ModifyComponent
     ],
 
     bootstrap:[AppComponent],

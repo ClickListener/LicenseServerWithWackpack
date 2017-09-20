@@ -14,12 +14,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var user_service_1 = require("../../services/user.service");
+var router_1 = require("@angular/router");
 var HomeComponent = (function () {
-    function HomeComponent(userService) {
+    function HomeComponent(userService, router) {
         this.userService = userService;
+        this.router = router;
     }
     HomeComponent.prototype.ngOnInit = function () {
         this.user = this.userService.user;
+    };
+    HomeComponent.prototype.managerLicense = function () {
+        this.router.navigate(['manager-license']);
     };
     return HomeComponent;
 }());
@@ -28,7 +33,7 @@ HomeComponent = __decorate([
         templateUrl: './home.component.html',
         styleUrls: ['./home.component.css']
     }),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [user_service_1.UserService, router_1.Router])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

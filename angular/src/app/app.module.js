@@ -19,6 +19,9 @@ var home_component_1 = require("./components/home/home.component");
 var user_service_1 = require("./services/user.service");
 var http_1 = require("@angular/http");
 var forms_1 = require("@angular/forms");
+var createNew_component_1 = require("./components/license/license_createNew/createNew.component");
+var manager_component_1 = require("./components/license/license_manager/manager.component");
+var modify_component_1 = require("./components/license/license_modify/modify.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -37,7 +40,10 @@ AppModule = __decorate([
             app_component_1.AppComponent,
             sign_in_component_1.SignInComponent,
             sign_up_component_1.SignUpComponent,
-            home_component_1.HomeComponent
+            home_component_1.HomeComponent,
+            createNew_component_1.CreateNewComponent,
+            manager_component_1.ManagerComponent,
+            modify_component_1.ModifyComponent
         ],
         bootstrap: [app_component_1.AppComponent],
         providers: [user_service_1.UserService]

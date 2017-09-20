@@ -14,6 +14,9 @@ var core_1 = require("@angular/core");
 var sign_in_component_1 = require("./components/user/user_signIn/sign-in.component");
 var sign_up_component_1 = require("./components/user/user_signUp/sign-up.component");
 var home_component_1 = require("./components/home/home.component");
+var manager_component_1 = require("./components/license/license_manager/manager.component");
+var createNew_component_1 = require("./components/license/license_createNew/createNew.component");
+var modify_component_1 = require("./components/license/license_modify/modify.component");
 /**
  * 路由模块
  */
@@ -29,6 +32,18 @@ var routes = [
     {
         path: 'sign-up',
         component: sign_up_component_1.SignUpComponent
+    },
+    {
+        path: 'manager-license',
+        component: manager_component_1.ManagerComponent
+    },
+    {
+        path: 'create-newLicense',
+        component: createNew_component_1.CreateNewComponent
+    },
+    {
+        path: 'modify-license',
+        component: modify_component_1.ModifyComponent
     }
 ];
 var AppRoutingModule = (function () {
