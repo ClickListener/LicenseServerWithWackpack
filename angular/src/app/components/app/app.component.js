@@ -13,30 +13,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var User_1 = require("../../model/User");
+var user_service_1 = require("../../services/user.service");
+var router_1 = require("@angular/router");
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(userService, router) {
+        this.userService = userService;
+        this.router = router;
     }
     AppComponent.prototype.ngOnInit = function () {
-        if (!this.user) {
-            console.log("user = " + this.user);
+        console.log('ngOnInit()');
+    };
+    AppComponent.prototype.ngOnChanges = function (changes) {
+        console.log('ngOnChanges()');
+    };
+    AppComponent.prototype.ngDoCheck = function () {
+        console.log('ngDoCheck()');
+        console.log('user = ' + this.user);
+        if (this.user == undefined && this.userService.user != undefined) {
+            this.user = this.userService.user;
+            console.log("user = " + this.user.email);
         }
         else {
-            console.log("user = " + "呵呵呵");
+            // console.log("user = " + this.user.email);
         }
     };
     return AppComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", User_1.User)
-], AppComponent.prototype, "user", void 0);
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
         templateUrl: './app.component.html',
         styleUrls: ['./app.component.css']
-    })
+    }),
+    __metadata("design:paramtypes", [user_service_1.UserService, router_1.Router])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

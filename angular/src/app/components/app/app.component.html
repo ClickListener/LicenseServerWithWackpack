@@ -12,7 +12,7 @@
             <a class="navbar-brand waves-effect" routerLink="./">iHealth</a>
 
         <!--导航栏右边的内容-->
-        <div id="nav-content" class="collapse navbar-collapse">
+        <div id="nav-content" class="collapse navbar-collapse" *ngIf="!user">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item waves-effect">
                     <a class="nav-link" routerLink="/sign-up" routerLinkActive="active">Sign Up</a>

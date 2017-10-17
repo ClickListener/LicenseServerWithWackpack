@@ -60,6 +60,23 @@ export class UserService {
 
     }
 
+    /**
+     * 登出服务
+     * @returns {Promise<TResult|T>}
+     */
+    signOut() : void {
+
+        console.log("signOut()");
+        const url = '/api/auth/signout';
+
+        this.http.get(url, this.header)
+            .toPromise()
+            .then(() => {
+                console.log("res.json() = ");
+            })
+            .catch(UserService.handleError)
+    }
+
     private static handleError(error:any) : Promise<any> {
         console.log('An error occurred', JSON.stringify(error));//for demo purposes only
         return Promise.reject(error.message || error);

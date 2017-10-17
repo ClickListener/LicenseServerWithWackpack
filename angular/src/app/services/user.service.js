@@ -53,6 +53,20 @@ var UserService = UserService_1 = (function () {
         })
             .catch(UserService_1.handleError);
     };
+    /**
+     * 登出服务
+     * @returns {Promise<TResult|T>}
+     */
+    UserService.prototype.signOut = function () {
+        console.log("signOut()");
+        var url = '/api/auth/signout';
+        this.http.get(url, this.header)
+            .toPromise()
+            .then(function () {
+            console.log("res.json() = ");
+        })
+            .catch(UserService_1.handleError);
+    };
     UserService.handleError = function (error) {
         console.log('An error occurred', JSON.stringify(error)); //for demo purposes only
         return Promise.reject(error.message || error);
