@@ -23,9 +23,8 @@ var ManagerComponent = (function () {
     ManagerComponent.prototype.ngOnInit = function () {
         this.user = this.userService.user;
     };
-    ManagerComponent.prototype.signOut = function () {
-        console.log('signOut');
-        this.userService.signOut();
+    ManagerComponent.prototype.createNewLicense = function () {
+        this.router.navigate(['./create-newLicense']);
     };
     return ManagerComponent;
 }());

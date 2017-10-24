@@ -12,7 +12,6 @@ const bodyParser = require('body-parser');
 const expressSession = require('express-session');
 
 const passport = require('./authenticate/passport-config');
-const flash = require('connect-flash');
 
 const cookieParser = require('cookie-parser');
 
@@ -21,6 +20,9 @@ const cookieParser = require('cookie-parser');
 
 
 const app = express();
+
+const uri = 'mongodb://localhost/mongoose-server';
+mongoose.connect(uri);
 
 /**
  * Contains key-value pairs of data submitted in the request body. By default, it is undefined,
@@ -37,15 +39,17 @@ app.use(expressSession({
     saveUninitialized: false,
 }));
 
-app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
 
 
-app.use(express.static('dist'));
+app.use(express.static('dist')).get(function (req, res) {
+    console.info("___req.user = " + req.user);
+});
 
 app.use('/', routes);
+
 
 
 

@@ -29,13 +29,14 @@ export class SignInComponent {
                 // this.user.email = res.email;
                 // this.user.licenses = JSON.stringify(res.licenses);
                 console.log("email = " + JSON.stringify(this.user.email));
-                console.log("totalUserNumber = " + JSON.stringify(this.user.licenses[0].totalUserNumber));
-                console.log("devices = " + JSON.stringify(this.user.licenses[0].devices));
+                // console.log("totalUserNumber = " + JSON.stringify(this.user.licenses[0].totalUserNumber));
+                // console.log("devices = " + JSON.stringify(this.user.licenses[0].devices));
                 alert("登录成功");
                 this.router.navigate(['/']);
             })
             .catch(error => {
                 console.log("error = " + JSON.stringify(error));
+                alert(error._body.message);
             })
     }
 }

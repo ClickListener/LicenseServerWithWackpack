@@ -14,6 +14,7 @@ import {FormsModule} from "@angular/forms";
 import {CreateNewComponent} from "./components/license/license_createNew/createNew.component";
 import {ManagerComponent} from "./components/license/license_manager/manager.component";
 import {ModifyComponent} from "./components/license/license_modify/modify.component";
+import {LicenseService} from "./services/license.service";
 
 @NgModule({
 
@@ -37,7 +38,7 @@ import {ModifyComponent} from "./components/license/license_modify/modify.compon
 
     bootstrap:[AppComponent],
 
-    providers:[UserService]
+    providers:[UserService, LicenseService]
 })
 
 export class AppModule {}

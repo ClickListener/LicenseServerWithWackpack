@@ -1,21 +1,14 @@
 /**
  * Created by zhangxu on 03/08/2017.
  */
+import {License} from "./License";
+
 export class User {
 
+    _id:string;
     email: string;
-    licenses: {
-        totalUserNumber:number,
-        devices: {
-            expiredDate:string,
-            deviceModule:{
-                series:string,
-                deviceName:string,
-                displayName:string
-            },
-            deviceNumber:number
-        }[]
-    }[];
-
+    roles: string;
+    licenseType:String;
+    licenses: License[]
 
 }

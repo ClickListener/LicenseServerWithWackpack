@@ -6,6 +6,7 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import {User} from "../model/User";
+import {Observable} from "rxjs";
 
 
 @Injectable()
@@ -35,6 +36,10 @@ export class UserService {
             .then(res => {
                 console.log("res.json = " + JSON.stringify(res.json()));
                 this.user = res.json() as User;
+
+                console.log("email = " + JSON.stringify(this.user.email));
+                console.log("roles = " + JSON.stringify(this.user.roles));
+                console.log("licenseType = " + JSON.stringify(this.user.licenseType));
                return res.json() as User;
             })
             .catch(UserService.handleError)
@@ -46,7 +51,7 @@ export class UserService {
      * @param userInfo
      *
      */
-    signUp(userInfo : any) : Promise<void> {
+    signUp(userInfo : any) : Promise<User> {
         const url = '/api/auth/signup';
 
         console.log(JSON.stringify(userInfo));
@@ -54,7 +59,10 @@ export class UserService {
         return this.http.post(url, JSON.stringify(userInfo), this.header)
             .toPromise()
             .then(res => {
-                console.log("res.json() = " + res.json());
+                console.log("res.json = " + JSON.stringify(res.json()));
+                this.user = res.json() as User;
+                return res.json() as User;
+
             })
             .catch(UserService.handleError)
 
@@ -64,17 +72,21 @@ export class UserService {
      * 登出服务
      * @returns {Promise<TResult|T>}
      */
-    signOut() : void {
+    signOut() : Promise<void> {
 
         console.log("signOut()");
         const url = '/api/auth/signout';
 
-        this.http.get(url, this.header)
-            .toPromise()
-            .then(() => {
-                console.log("res.json() = ");
+        return this.http.get(url).toPromise()
+            .then((msg) => {
+
+                console.log('msg = ' + msg);
+                this.user = undefined;
+                console.info('user = ' + this.user);
+
             })
-            .catch(UserService.handleError)
+            .catch(UserService.handleError);
+
     }
 
     private static handleError(error:any) : Promise<any> {

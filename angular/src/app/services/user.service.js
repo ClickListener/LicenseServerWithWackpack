@@ -34,6 +34,9 @@ var UserService = UserService_1 = (function () {
             .then(function (res) {
             console.log("res.json = " + JSON.stringify(res.json()));
             _this.user = res.json();
+            console.log("email = " + JSON.stringify(_this.user.email));
+            console.log("roles = " + JSON.stringify(_this.user.roles));
+            console.log("licenseType = " + JSON.stringify(_this.user.licenseType));
             return res.json();
         })
             .catch(UserService_1.handleError);
@@ -44,12 +47,15 @@ var UserService = UserService_1 = (function () {
      *
      */
     UserService.prototype.signUp = function (userInfo) {
+        var _this = this;
         var url = '/api/auth/signup';
         console.log(JSON.stringify(userInfo));
         return this.http.post(url, JSON.stringify(userInfo), this.header)
             .toPromise()
             .then(function (res) {
-            console.log("res.json() = " + res.json());
+            console.log("res.json = " + JSON.stringify(res.json()));
+            _this.user = res.json();
+            return res.json();
         })
             .catch(UserService_1.handleError);
     };
@@ -58,12 +64,14 @@ var UserService = UserService_1 = (function () {
      * @returns {Promise<TResult|T>}
      */
     UserService.prototype.signOut = function () {
+        var _this = this;
         console.log("signOut()");
         var url = '/api/auth/signout';
-        this.http.get(url, this.header)
-            .toPromise()
-            .then(function () {
-            console.log("res.json() = ");
+        return this.http.get(url).toPromise()
+            .then(function (msg) {
+            console.log('msg = ' + msg);
+            _this.user = undefined;
+            console.info('user = ' + _this.user);
         })
             .catch(UserService_1.handleError);
     };

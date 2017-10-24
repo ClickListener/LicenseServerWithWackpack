@@ -29,16 +29,21 @@ export class AppComponent implements OnInit, OnChanges, DoCheck {
         console.log('ngOnChanges()');
     }
 
+    signOut():void {
+        console.log('signOut');
+        this.userService.signOut()
+            .then(() => {
+                this.router.navigate(['/']);
+            })
+            .catch((error:any) => {
+                console.log('managerComponent---error = ' + error);
+            })
+    }
+
     ngDoCheck(): void {
         console.log('ngDoCheck()');
 
-        console.log('user = ' + this.user);
-        if (this.user == undefined && this.userService.user != undefined) {
-            this.user = this.userService.user;
-            console.log("user = " + this.user.email);
-        } else {
-            // console.log("user = " + this.user.email);
-        }
+        this.user = this.userService.user;
     }
 
 

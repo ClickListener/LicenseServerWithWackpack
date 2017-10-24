@@ -20,6 +20,9 @@ var HomeComponent = (function () {
         this.userService = userService;
         this.router = router;
     }
+    HomeComponent.prototype.ngDoCheck = function () {
+        this.user = this.userService.user;
+    };
     HomeComponent.prototype.ngOnInit = function () {
         this.user = this.userService.user;
     };

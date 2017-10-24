@@ -26,16 +26,20 @@ var AppComponent = (function () {
     AppComponent.prototype.ngOnChanges = function (changes) {
         console.log('ngOnChanges()');
     };
+    AppComponent.prototype.signOut = function () {
+        var _this = this;
+        console.log('signOut');
+        this.userService.signOut()
+            .then(function () {
+            _this.router.navigate(['/']);
+        })
+            .catch(function (error) {
+            console.log('managerComponent---error = ' + error);
+        });
+    };
     AppComponent.prototype.ngDoCheck = function () {
         console.log('ngDoCheck()');
-        console.log('user = ' + this.user);
-        if (this.user == undefined && this.userService.user != undefined) {
-            this.user = this.userService.user;
-            console.log("user = " + this.user.email);
-        }
-        else {
-            // console.log("user = " + this.user.email);
-        }
+        this.user = this.userService.user;
     };
     return AppComponent;
 }());

@@ -2,7 +2,7 @@
  * Created by zhangxu on 2017/7/13.
  */
 
-import {Component, OnInit} from "@angular/core";
+import {Component, DoCheck, OnInit} from "@angular/core";
 import {User} from "../../model/User";
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
@@ -11,11 +11,19 @@ import {Router} from "@angular/router";
     styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit, DoCheck{
+
+
+    user:User;
+
+
+    ngDoCheck(): void {
+        this.user = this.userService.user;
+    }
 
     constructor(private userService:UserService, private router:Router) {}
 
-    user:User;
+
     ngOnInit(): void {
         this.user = this.userService.user;
     }

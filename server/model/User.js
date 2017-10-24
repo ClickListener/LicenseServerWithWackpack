@@ -6,16 +6,32 @@ const mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 
-var userSchema = new Schema({
-    email:{type:String,required:true},
-    password:{type:String,required:true}
+const userSchema = new Schema({
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    licenseType: {
+        type: String,
+        default: 'new'
+    },
+    roles: {
+        type: [{
+            type: String,
+            enum: ['user', 'admin']
+        }],
+        default: ['user'],
+        required: 'Please provide at least one role'
+    },
+    created: {
+        type: Date,
+        default: Date.now()
+    }
 });
-
-userSchema.methods.findUniqueUserByEmail = function(email, callback) {
-    return this.model('User').find({email: email}, callback);
-};
-
-userSchema.statics.signIn
 
 
 module.exports =  mongoose.model('User', userSchema);

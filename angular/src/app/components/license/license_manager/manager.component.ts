@@ -21,11 +21,8 @@ export class ManagerComponent implements OnInit{
         this.user = this.userService.user;
     }
 
-
-    signOut():void {
-        console.log('signOut');
-        this.userService.signOut();
+    createNewLicense(): void {
+        this.router.navigate(['./create-newLicense'])
     }
-
 
 }

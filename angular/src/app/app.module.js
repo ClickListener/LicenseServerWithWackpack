@@ -22,6 +22,7 @@ var forms_1 = require("@angular/forms");
 var createNew_component_1 = require("./components/license/license_createNew/createNew.component");
 var manager_component_1 = require("./components/license/license_manager/manager.component");
 var modify_component_1 = require("./components/license/license_modify/modify.component");
+var license_service_1 = require("./services/license.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -46,7 +47,7 @@ AppModule = __decorate([
             modify_component_1.ModifyComponent
         ],
         bootstrap: [app_component_1.AppComponent],
-        providers: [user_service_1.UserService]
+        providers: [user_service_1.UserService, license_service_1.LicenseService]
     })
 ], AppModule);
 exports.AppModule = AppModule;
