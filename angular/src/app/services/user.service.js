@@ -14,11 +14,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var license_service_1 = require("./license.service");
 var UserService = UserService_1 = (function () {
-    function UserService(http, licenseService) {
+    function UserService(http) {
         this.http = http;
-        this.licenseService = licenseService;
         this.header = {
             headers: new http_1.Headers({ 'Content-Type': 'application/json' })
         };
@@ -29,15 +27,16 @@ var UserService = UserService_1 = (function () {
      */
     UserService.prototype.signIn = function (userInfo) {
         var _this = this;
-        // const url = '/api/auth/signin';
-        var url = '/user/signIn';
+        var url = '/user/signin';
         console.log(JSON.stringify(userInfo));
         return this.http.post(url, JSON.stringify(userInfo), this.header)
             .toPromise()
             .then(function (res) {
             console.log("res.json = " + JSON.stringify(res.json()));
-            _this.user = res.json().user;
-            _this.licenseService.licenses = res.json().licenses;
+            _this.user = res.json();
+            console.log("email = " + JSON.stringify(_this.user.email));
+            console.log("roles = " + JSON.stringify(_this.user.roles));
+            console.log("licenseType = " + JSON.stringify(_this.user.licenseType));
             return res.json();
         })
             .catch(UserService_1.handleError);
@@ -49,8 +48,7 @@ var UserService = UserService_1 = (function () {
      */
     UserService.prototype.signUp = function (userInfo) {
         var _this = this;
-        // const url = '/api/auth/signup';
-        var url = '/user/signUp';
+        var url = '/user/signup';
         console.log(JSON.stringify(userInfo));
         return this.http.post(url, JSON.stringify(userInfo), this.header)
             .toPromise()
@@ -68,8 +66,7 @@ var UserService = UserService_1 = (function () {
     UserService.prototype.signOut = function () {
         var _this = this;
         console.log("signOut()");
-        // const url = '/api/auth/signout';
-        var url = '/user/signOut';
+        var url = '/user/signout';
         return this.http.get(url).toPromise()
             .then(function (msg) {
             console.log('msg = ' + msg);
@@ -86,7 +83,7 @@ var UserService = UserService_1 = (function () {
 }());
 UserService = UserService_1 = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, license_service_1.LicenseService])
+    __metadata("design:paramtypes", [http_1.Http])
 ], UserService);
 exports.UserService = UserService;
 var UserService_1;

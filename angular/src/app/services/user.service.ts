@@ -7,14 +7,12 @@ import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import {User} from "../model/User";
 import {Observable} from "rxjs";
-import {LicenseService} from "./license.service";
-import {License} from "../model/License";
 
 
 @Injectable()
 export class UserService {
 
-    constructor(private http : Http, private licenseService: LicenseService) {
+    constructor(private http : Http) {
 
     }
 
@@ -30,19 +28,19 @@ export class UserService {
      * @param userInfo
      */
     signIn(userInfo : any) : Promise<User> {
-        // const url = '/api/auth/signin';
-        const url = '/user/signIn';
+        const url = '/user/signin';
         console.log(JSON.stringify(userInfo));
 
         return this.http.post(url, JSON.stringify(userInfo), this.header)
             .toPromise()
             .then(res => {
                 console.log("res.json = " + JSON.stringify(res.json()));
+                this.user = res.json() as User;
 
-                this.user = res.json().user as User;
-                this.licenseService.licenses = res.json().licenses as License[];
-
-               return res.json() as User;
+                console.log("email = " + JSON.stringify(this.user.email));
+                console.log("roles = " + JSON.stringify(this.user.roles));
+                console.log("licenseType = " + JSON.stringify(this.user.licenseType));
+                return res.json() as User;
             })
             .catch(UserService.handleError)
 
@@ -54,8 +52,7 @@ export class UserService {
      *
      */
     signUp(userInfo : any) : Promise<User> {
-        // const url = '/api/auth/signup';
-        const url = '/user/signUp';
+        const url = '/user/signup';
 
         console.log(JSON.stringify(userInfo));
 
@@ -78,8 +75,7 @@ export class UserService {
     signOut() : Promise<void> {
 
         console.log("signOut()");
-        // const url = '/api/auth/signout';
-        const url = '/user/signOut';
+        const url = '/user/signout';
 
         return this.http.get(url).toPromise()
             .then((msg) => {

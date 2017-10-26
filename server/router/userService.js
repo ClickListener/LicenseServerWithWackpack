@@ -87,19 +87,28 @@ router.get('/signOut', function (req, res) {
 });
 
 
-function generateUser(user, licenses) {
+function generateUser(_user, licenses) {
 
-    user_cb = {
+    // let user_cb = {
+    //     _id: _user._id,
+    //     created: _user.created.toString(),
+    //     roles: _user.roles,
+    //     email: _user.email,
+    //     licenseType: _user.licenseType
+    // };
+    //
+    // return {
+    //     user:user_cb,
+    //     licenses: licenses
+    // }
+
+    return {
         _id: user._id,
         created: user.created.toString(),
         roles: user.roles,
         email: user.email,
+        licenses: licenses,
         licenseType: user.licenseType
-    };
-
-    return {
-        user:user_cb,
-        licenses: licenses
     }
 }
 
