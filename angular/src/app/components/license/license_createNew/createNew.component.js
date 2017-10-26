@@ -28,7 +28,9 @@ var CreateNewComponent = (function () {
     CreateNewComponent.prototype.ngOnInit = function () {
     };
     CreateNewComponent.prototype.createNewLicense = function (installedPhoneNumber, totalUserNumber, BundleIdOrPackageName) {
+        var _this = this;
         console.info('createNewLicense()');
+        console.info('userId = ' + this.userService.user._id);
         console.info('installedPhoneNumber = ' + installedPhoneNumber);
         console.info('totalUserNumber = ' + totalUserNumber);
         console.info('BundleIdOrPackageName = ' + BundleIdOrPackageName);
@@ -37,6 +39,14 @@ var CreateNewComponent = (function () {
             "installedPhoneNumber": installedPhoneNumber,
             "totalUserNumber": totalUserNumber,
             "BundleIdOrPackageName": BundleIdOrPackageName
+        })
+            .then(function (res) {
+            console.info('res = ' + JSON.stringify(res));
+            //保存成功，跳转到管理界面
+            _this.router.navigate(['/manager-license']);
+        })
+            .catch(function (err) {
+            console.info('error = ' + err);
         });
     };
     return CreateNewComponent;

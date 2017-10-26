@@ -5,6 +5,7 @@ import {Component} from "@angular/core";
 import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
 import {User} from "../../../model/User";
+import {License} from "../../../model/License";
 
 
 @Component({
@@ -25,12 +26,8 @@ export class SignInComponent {
         this.userService.signIn({"email": email, "password": password})
             .then((res) => {
                 this.user = res;
-                // this.user.user = JSON.stringify(res);
-                // this.user.email = res.email;
-                // this.user.licenses = JSON.stringify(res.licenses);
+
                 console.log("email = " + JSON.stringify(this.user.email));
-                // console.log("totalUserNumber = " + JSON.stringify(this.user.licenses[0].totalUserNumber));
-                // console.log("devices = " + JSON.stringify(this.user.licenses[0].devices));
                 alert("登录成功");
                 this.router.navigate(['/']);
             })

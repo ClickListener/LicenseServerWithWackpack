@@ -6,7 +6,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 
-const routes = require('./router/userService');
+const userService = require('./router/userService');
+const licenseService = require('./router/licenseService');
+
 const bodyParser = require('body-parser');
 
 const expressSession = require('express-session');
@@ -48,7 +50,8 @@ app.use(express.static('dist')).get(function (req, res) {
     console.info("___req.user = " + req.user);
 });
 
-app.use('/', routes);
+app.use('/user',userService);
+app.use('/license',licenseService);
 
 
 

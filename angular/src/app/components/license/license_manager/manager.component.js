@@ -15,13 +15,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var user_service_1 = require("../../../services/user.service");
 var router_1 = require("@angular/router");
+var license_service_1 = require("../../../services/license.service");
 var ManagerComponent = (function () {
-    function ManagerComponent(userService, router) {
+    function ManagerComponent(userService, router, licenseService) {
         this.userService = userService;
         this.router = router;
+        this.licenseService = licenseService;
     }
     ManagerComponent.prototype.ngOnInit = function () {
         this.user = this.userService.user;
+    };
+    ManagerComponent.prototype.ngDoCheck = function () {
+        this.licenses = this.licenseService.licenses;
     };
     ManagerComponent.prototype.createNewLicense = function () {
         this.router.navigate(['./create-newLicense']);
@@ -34,7 +39,7 @@ ManagerComponent = __decorate([
         templateUrl: './manager.component.html',
         styleUrls: ['manager.component.css']
     }),
-    __metadata("design:paramtypes", [user_service_1.UserService, router_1.Router])
+    __metadata("design:paramtypes", [user_service_1.UserService, router_1.Router, license_service_1.LicenseService])
 ], ManagerComponent);
 exports.ManagerComponent = ManagerComponent;
 //# sourceMappingURL=manager.component.js.map

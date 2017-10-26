@@ -11,20 +11,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var user_service_1 = require("./user.service");
 var LicenseService = LicenseService_1 = (function () {
-    function LicenseService(http) {
+    function LicenseService(http, userService) {
         this.http = http;
+        this.userService = userService;
         this.header = {
             headers: new http_1.Headers({ 'Content-Type': 'application/json' })
         };
     }
     LicenseService.prototype.createNewLicense = function (licenseInfo) {
+        var _this = this;
         console.info("licenseInfo = " + JSON.stringify(licenseInfo));
-        var url = '/api/auth/createNewLicense';
+        // const url = '/api/auth/createNewLicense';
+        var url = '/license/createNewLicense';
         return this.http.post(url, JSON.stringify(licenseInfo), this.header)
             .toPromise()
             .then(function (res) {
-            console.info('res = ' + JSON.stringify(res));
+            _this.licenses = res.json().licenses;
+            console.info('res = ' + JSON.stringify(_this.licenses));
+            return res.json();
         })
             .catch(LicenseService_1.handleError);
     };
@@ -36,7 +42,7 @@ var LicenseService = LicenseService_1 = (function () {
 }());
 LicenseService = LicenseService_1 = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [http_1.Http, user_service_1.UserService])
 ], LicenseService);
 exports.LicenseService = LicenseService;
 var LicenseService_1;

@@ -9,6 +9,4 @@ export class User {
     email: string;
     roles: string;
     licenseType:String;
-    licenses: License[]
-
 }

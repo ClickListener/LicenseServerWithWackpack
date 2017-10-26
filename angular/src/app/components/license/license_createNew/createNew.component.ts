@@ -25,8 +25,9 @@ export class CreateNewComponent implements OnInit, DoCheck{
         console.log('createNew----------constructor()');
     }
 
-    createNewLicense(installedPhoneNumber:Number, totalUserNumber:Number, BundleIdOrPackageName:String) : void {
+    createNewLicense(installedPhoneNumber:number, totalUserNumber:number, BundleIdOrPackageName:string) : void {
         console.info('createNewLicense()');
+        console.info('userId = ' + this.userService.user._id);
         console.info('installedPhoneNumber = ' + installedPhoneNumber );
         console.info('totalUserNumber = ' + totalUserNumber );
         console.info('BundleIdOrPackageName = ' + BundleIdOrPackageName );
@@ -38,6 +39,16 @@ export class CreateNewComponent implements OnInit, DoCheck{
             "BundleIdOrPackageName": BundleIdOrPackageName
 
         })
+            .then( res => {
+                console.info('res = ' + JSON.stringify(res));
+                //保存成功，跳转到管理界面
+                this.router.navigate(['/manager-license']);
+
+        })
+            .catch(err => {
+                console.info('error = ' + err);
+            })
+
 
     }
 

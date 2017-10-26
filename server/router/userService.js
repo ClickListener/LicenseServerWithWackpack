@@ -17,7 +17,7 @@ const License = require('../model/License');
 
 
 
-router.post('/api/auth/signup', function (req, res, next) {
+router.post('/signUp', function (req, res, next) {
     console.log('local.signUp');
     passport.authenticate('local.signUp', function (error, user, info) {
         console.log('error = ' + JSON.stringify(error));
@@ -43,7 +43,7 @@ router.post('/api/auth/signup', function (req, res, next) {
     })(req, res, next)
 });
 
-router.post('/api/auth/signin',function (req, res, next) {
+router.post('/signIn',function (req, res, next) {
         passport.authenticate('local.signIn',function (error, user, info) {
             console.log('error = ' + JSON.stringify(error));
             console.log('user = ' + JSON.stringify(user));
@@ -77,7 +77,7 @@ router.post('/api/auth/signin',function (req, res, next) {
 });
 
 
-router.get('/api/auth/signout', function (req, res) {
+router.get('/signOut', function (req, res) {
     console.info('登出');
     console.info('/api/auth/signout————————--req.user = ' + JSON.stringify(req.user));
     req.logout();
@@ -88,13 +88,18 @@ router.get('/api/auth/signout', function (req, res) {
 
 
 function generateUser(user, licenses) {
-    return {
+
+    user_cb = {
         _id: user._id,
         created: user.created.toString(),
         roles: user.roles,
         email: user.email,
-        licenses: licenses,
         licenseType: user.licenseType
+    };
+
+    return {
+        user:user_cb,
+        licenses: licenses
     }
 }
 
