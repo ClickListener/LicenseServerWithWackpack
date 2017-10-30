@@ -11,15 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var user_service_1 = require("./user.service");
-var LicenseService = LicenseService_1 = (function () {
-    function LicenseService(http, userService) {
+var LicenseService = (function () {
+    function LicenseService(http) {
         this.http = http;
-        this.userService = userService;
         this.header = {
             headers: new http_1.Headers({ 'Content-Type': 'application/json' })
         };
     }
+    LicenseService_1 = LicenseService;
     LicenseService.prototype.createNewLicense = function (licenseInfo) {
         var _this = this;
         console.info("licenseInfo = " + JSON.stringify(licenseInfo));
@@ -38,12 +37,12 @@ var LicenseService = LicenseService_1 = (function () {
         console.log('An error occurred', JSON.stringify(error)); //for demo purposes only
         return Promise.reject(error.message || error);
     };
+    LicenseService = LicenseService_1 = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
+    ], LicenseService);
     return LicenseService;
+    var LicenseService_1;
 }());
-LicenseService = LicenseService_1 = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, user_service_1.UserService])
-], LicenseService);
 exports.LicenseService = LicenseService;
-var LicenseService_1;
 //# sourceMappingURL=license.service.js.map

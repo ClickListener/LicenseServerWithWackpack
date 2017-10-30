@@ -28,7 +28,12 @@ export class ManagerComponent implements OnInit, DoCheck{
     }
 
     ngDoCheck(): void {
-        this.licenses = this.licenseService.licenses;
+        if (this.licenseService.licenses !== null) {
+            console.info("this.licenseService.licenses !== null");
+            this.licenses = this.licenseService.licenses;
+            console.info("this.licenses = " + JSON.stringify(this.licenses));
+        }
+
     }
 
     createNewLicense(): void {

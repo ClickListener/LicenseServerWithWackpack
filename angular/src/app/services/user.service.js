@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by zhangxu on 2017/7/17.
  */
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -14,13 +14,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var UserService = UserService_1 = (function () {
-    function UserService(http) {
+var license_service_1 = require("./license.service");
+var UserService = (function () {
+    function UserService(http, licenseService) {
         this.http = http;
+        this.licenseService = licenseService;
         this.header = {
             headers: new http_1.Headers({ 'Content-Type': 'application/json' })
         };
     }
+    UserService_1 = UserService;
     /**
      * 登录服务3
      * @param userInfo
@@ -32,12 +35,15 @@ var UserService = UserService_1 = (function () {
         return this.http.post(url, JSON.stringify(userInfo), this.header)
             .toPromise()
             .then(function (res) {
-            console.log("res.json = " + JSON.stringify(res.json()));
-            _this.user = res.json();
-            console.log("email = " + JSON.stringify(_this.user.email));
-            console.log("roles = " + JSON.stringify(_this.user.roles));
-            console.log("licenseType = " + JSON.stringify(_this.user.licenseType));
-            return res.json();
+            console.log("user = " + JSON.stringify(res.json().user));
+            console.log("As user = " + JSON.stringify(res.json().user));
+            _this.user = res.json().user;
+            _this.licenseService.licenses = res.json().licenses;
+            console.log("this.licenseService.licenses = " + JSON.stringify(_this.licenseService.licenses));
+            console.log("res.json().licenses = " + JSON.stringify(res.json().licenses));
+            console.log("res.json().licenses as License[] = " + JSON.stringify(res.json().licenses));
+            // this.licenseService.licenses = res.json().licenses as License[];
+            return res.json().user;
         })
             .catch(UserService_1.handleError);
     };
@@ -54,8 +60,9 @@ var UserService = UserService_1 = (function () {
             .toPromise()
             .then(function (res) {
             console.log("res.json = " + JSON.stringify(res.json()));
-            _this.user = res.json();
-            return res.json();
+            _this.user = res.json().user;
+            _this.licenseService.licenses = res.json().licenses;
+            return res.json().user;
         })
             .catch(UserService_1.handleError);
     };
@@ -71,6 +78,7 @@ var UserService = UserService_1 = (function () {
             .then(function (msg) {
             console.log('msg = ' + msg);
             _this.user = undefined;
+            _this.licenseService.licenses = undefined;
             console.info('user = ' + _this.user);
         })
             .catch(UserService_1.handleError);
@@ -79,12 +87,12 @@ var UserService = UserService_1 = (function () {
         console.log('An error occurred', JSON.stringify(error)); //for demo purposes only
         return Promise.reject(error.message || error);
     };
+    UserService = UserService_1 = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http, license_service_1.LicenseService])
+    ], UserService);
     return UserService;
+    var UserService_1;
 }());
-UserService = UserService_1 = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
-], UserService);
 exports.UserService = UserService;
-var UserService_1;
 //# sourceMappingURL=user.service.js.map

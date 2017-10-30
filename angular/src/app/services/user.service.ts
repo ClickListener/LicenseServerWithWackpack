@@ -7,12 +7,14 @@ import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import {User} from "../model/User";
 import {Observable} from "rxjs";
+import {License} from "../model/License";
+import {LicenseService} from "./license.service";
 
 
 @Injectable()
 export class UserService {
 
-    constructor(private http : Http) {
+    constructor(private http : Http, private licenseService:LicenseService) {
 
     }
 
@@ -34,13 +36,16 @@ export class UserService {
         return this.http.post(url, JSON.stringify(userInfo), this.header)
             .toPromise()
             .then(res => {
-                console.log("res.json = " + JSON.stringify(res.json()));
-                this.user = res.json() as User;
+                console.log("user = " + JSON.stringify(res.json().user));
+                console.log("As user = " + JSON.stringify(res.json().user as User));
+                this.user = res.json().user as User;
+                this.licenseService.licenses = res.json().licenses;
+                console.log("this.licenseService.licenses = " + JSON.stringify(this.licenseService.licenses));
+                console.log("res.json().licenses = " + JSON.stringify(res.json().licenses));
+                console.log("res.json().licenses as License[] = " + JSON.stringify(res.json().licenses as License[]));
+                // this.licenseService.licenses = res.json().licenses as License[];
 
-                console.log("email = " + JSON.stringify(this.user.email));
-                console.log("roles = " + JSON.stringify(this.user.roles));
-                console.log("licenseType = " + JSON.stringify(this.user.licenseType));
-                return res.json() as User;
+                return res.json().user as User;
             })
             .catch(UserService.handleError)
 
@@ -60,8 +65,9 @@ export class UserService {
             .toPromise()
             .then(res => {
                 console.log("res.json = " + JSON.stringify(res.json()));
-                this.user = res.json() as User;
-                return res.json() as User;
+                this.user = res.json().user as User;
+                this.licenseService.licenses = res.json().licenses;
+                return res.json().user as User;
 
             })
             .catch(UserService.handleError)
@@ -82,6 +88,7 @@ export class UserService {
 
                 console.log('msg = ' + msg);
                 this.user = undefined;
+                this.licenseService.licenses = undefined;
                 console.info('user = ' + this.user);
 
             })

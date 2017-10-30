@@ -11,7 +11,7 @@ import {UserService} from "./user.service";
 export class LicenseService {
 
 
-    constructor(private http: Http, private userService: UserService) {}
+    constructor(private http: Http) {}
 
     private header = {
         headers: new Headers({'Content-Type': 'application/json'})

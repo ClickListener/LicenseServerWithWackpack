@@ -28,6 +28,7 @@ export class SignInComponent {
                 this.user = res;
 
                 console.log("email = " + JSON.stringify(this.user.email));
+                console.log("email = " + JSON.stringify(this.user.licenseType));
                 alert("登录成功");
                 this.router.navigate(['/']);
             })
