@@ -7,20 +7,21 @@ import {Router} from "@angular/router";
 import {User} from "../../../model/User";
 import {LicenseService} from "../../../services/license.service";
 import {License} from "../../../model/License";
+
 @Component({
     selector: 'manager-license',
     templateUrl: './manager.component.html',
     styleUrls: ['manager.component.css']
 })
 
-export class ManagerComponent implements OnInit, DoCheck{
+export class ManagerComponent implements OnInit, DoCheck {
 
 
-    user:User;
+    user: User;
     licenses: License[];
 
-    constructor(private userService:UserService, private router:Router, private licenseService:LicenseService) {}
-
+    constructor(private userService: UserService, private router: Router, private licenseService: LicenseService) {
+    }
 
 
     ngOnInit(): void {
@@ -28,11 +29,10 @@ export class ManagerComponent implements OnInit, DoCheck{
     }
 
     ngDoCheck(): void {
-        if (this.licenseService.licenses !== null) {
-            console.info("this.licenseService.licenses !== null");
-            this.licenses = this.licenseService.licenses;
-            console.info("this.licenses = " + JSON.stringify(this.licenses));
-        }
+
+        this.licenses = this.licenseService.licenses;
+        console.log('this.license !== []' + (this.licenses.length === 0));
+        console.info("this.licenses = " + JSON.stringify(this.licenses));
 
     }
 

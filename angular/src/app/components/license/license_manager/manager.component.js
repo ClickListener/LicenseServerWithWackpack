@@ -26,11 +26,9 @@ var ManagerComponent = (function () {
         this.user = this.userService.user;
     };
     ManagerComponent.prototype.ngDoCheck = function () {
-        if (this.licenseService.licenses !== null) {
-            console.info("this.licenseService.licenses !== null");
-            this.licenses = this.licenseService.licenses;
-            console.info("this.licenses = " + JSON.stringify(this.licenses));
-        }
+        this.licenses = this.licenseService.licenses;
+        console.log('this.license !== []' + (this.licenses.length === 0));
+        console.info("this.licenses = " + JSON.stringify(this.licenses));
     };
     ManagerComponent.prototype.createNewLicense = function () {
         this.router.navigate(['./create-newLicense']);
