@@ -15,6 +15,7 @@ import {CreateNewComponent} from "./components/license/license_createNew/createN
 import {ManagerComponent} from "./components/license/license_manager/manager.component";
 import {ModifyComponent} from "./components/license/license_modify/modify.component";
 import {LicenseService} from "./services/license.service";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
 @NgModule({
 

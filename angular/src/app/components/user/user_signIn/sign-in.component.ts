@@ -30,6 +30,7 @@ export class SignInComponent {
                 console.log("email = " + JSON.stringify(this.user.email));
                 console.log("email = " + JSON.stringify(this.user.licenseType));
                 alert("登录成功");
+
                 this.router.navigate(['/']);
             })
             .catch(error => {

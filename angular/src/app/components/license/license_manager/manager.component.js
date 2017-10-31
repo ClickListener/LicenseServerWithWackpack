@@ -33,15 +33,15 @@ var ManagerComponent = (function () {
     ManagerComponent.prototype.createNewLicense = function () {
         this.router.navigate(['./create-newLicense']);
     };
-    ManagerComponent = __decorate([
-        core_1.Component({
-            selector: 'manager-license',
-            templateUrl: './manager.component.html',
-            styleUrls: ['manager.component.css']
-        }),
-        __metadata("design:paramtypes", [user_service_1.UserService, router_1.Router, license_service_1.LicenseService])
-    ], ManagerComponent);
     return ManagerComponent;
 }());
+ManagerComponent = __decorate([
+    core_1.Component({
+        selector: 'manager-license',
+        templateUrl: './manager.component.html',
+        styleUrls: ['manager.component.css']
+    }),
+    __metadata("design:paramtypes", [user_service_1.UserService, router_1.Router, license_service_1.LicenseService])
+], ManagerComponent);
 exports.ManagerComponent = ManagerComponent;
 //# sourceMappingURL=manager.component.js.map

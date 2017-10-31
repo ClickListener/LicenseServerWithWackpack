@@ -17,8 +17,9 @@ export class CreateNewComponent implements OnInit, DoCheck{
     ngDoCheck(): void {
     }
     ngOnInit(): void {
-
     }
+
+
 
 
     constructor(private userService : UserService, private router: Router, private licenseService : LicenseService){

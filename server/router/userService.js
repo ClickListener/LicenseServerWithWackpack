@@ -44,6 +44,7 @@ router.post('/signUp', function (req, res, next) {
 });
 
 router.post('/signIn',function (req, res, next) {
+    console.log(JSON.stringify(req.head));
         passport.authenticate('local.signIn',function (error, user, info) {
             console.log('error = ' + JSON.stringify(error));
             console.log('user = ' + JSON.stringify(user));

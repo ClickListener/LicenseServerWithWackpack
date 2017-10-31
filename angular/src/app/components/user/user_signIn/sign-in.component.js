@@ -36,15 +36,15 @@ var SignInComponent = (function () {
             alert(error._body.message);
         });
     };
-    SignInComponent = __decorate([
-        core_1.Component({
-            selector: 'sign-in',
-            templateUrl: './sign-in.component.html',
-            styleUrls: ['sign-in.component.css']
-        }),
-        __metadata("design:paramtypes", [user_service_1.UserService, router_1.Router])
-    ], SignInComponent);
     return SignInComponent;
 }());
+SignInComponent = __decorate([
+    core_1.Component({
+        selector: 'sign-in',
+        templateUrl: './sign-in.component.html',
+        styleUrls: ['sign-in.component.css']
+    }),
+    __metadata("design:paramtypes", [user_service_1.UserService, router_1.Router])
+], SignInComponent);
 exports.SignInComponent = SignInComponent;
 //# sourceMappingURL=sign-in.component.js.map

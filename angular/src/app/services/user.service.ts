@@ -15,7 +15,9 @@ import {LicenseService} from "./license.service";
 export class UserService {
 
     constructor(private http : Http, private licenseService:LicenseService) {
-
+        console.log('UserService--------constructor');
+        this.user = JSON.parse(localStorage.getItem('user'));
+        console.log('UserService--------user = ' + this.user);
     }
 
     user: User;
@@ -40,6 +42,7 @@ export class UserService {
                 console.log("As user = " + JSON.stringify(res.json().user as User));
                 this.user = res.json().user as User;
                 this.licenseService.licenses = res.json().licenses;
+                localStorage.setItem('user', JSON.stringify(this.user));
                 console.log("this.licenseService.licenses = " + JSON.stringify(this.licenseService.licenses));
                 console.log("res.json().licenses = " + JSON.stringify(res.json().licenses));
                 console.log("res.json().licenses as License[] = " + JSON.stringify(res.json().licenses as License[]));
@@ -67,6 +70,9 @@ export class UserService {
                 console.log("res.json = " + JSON.stringify(res.json()));
                 this.user = res.json().user as User;
                 this.licenseService.licenses = res.json().licenses;
+                localStorage.setItem('user', JSON.stringify(this.user));
+
+
                 return res.json().user as User;
 
             })
@@ -89,6 +95,7 @@ export class UserService {
                 console.log('msg = ' + msg);
                 this.user = undefined;
                 this.licenseService.licenses = undefined;
+                localStorage.removeItem('user')
                 console.info('user = ' + this.user);
 
             })

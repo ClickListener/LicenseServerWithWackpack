@@ -46,15 +46,13 @@ app.use(passport.session());
 
 
 
-app.use(express.static('dist')).get(function (req, res) {
-    console.info("___req.user = " + req.user);
-});
+
+app.use(express.static('dist'))
+
+
 
 app.use('/user',userService);
 app.use('/license',licenseService);
-
-
-
 
 
 const server = app.listen(3000,'0.0.0.0',() => {

@@ -44,6 +44,9 @@ export class AppComponent implements OnInit, OnChanges, DoCheck {
         console.log('ngDoCheck()');
 
         this.user = this.userService.user;
+
+        console.log('this.user = ' + this.user);
+        console.log('this.userService.user = ' + this.userService.user);
     }
 
 
