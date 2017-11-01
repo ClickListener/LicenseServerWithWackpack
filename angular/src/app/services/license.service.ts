@@ -20,14 +20,15 @@ export class LicenseService {
 
     licenses:License[];
 
+    url = '/license';
+
     createNewLicense(licenseInfo:any) : Promise<License[]> {
 
         console.info("licenseInfo = " + JSON.stringify(licenseInfo));
 
 
         // const url = '/api/auth/createNewLicense';
-        const url = '/license/createNewLicense';
-        return this.http.post(url, JSON.stringify(licenseInfo), this.header)
+        return this.http.put(this.url, JSON.stringify(licenseInfo), this.header)
             .toPromise()
             .then( res => {
                 this.licenses = res.json().licenses as License[];
@@ -36,6 +37,19 @@ export class LicenseService {
             })
             .catch(LicenseService.handleError)
 
+    }
+
+    updateLicense(licenseInfo:any) : Promise<License[]> {
+        console.info("licenseInfo = " + JSON.stringify(licenseInfo));
+
+        return this.http.post(this.url, JSON.stringify(licenseInfo), this.header)
+            .toPromise()
+            .then(res => {
+                this.licenses = res.json().licenses as License[];
+                console.info('res = ' + JSON.stringify(this.licenses));
+                return res.json();
+            })
+            .catch(LicenseService.handleError);
     }
 
 

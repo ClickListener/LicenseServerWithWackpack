@@ -12,7 +12,7 @@ const User = require('../model/User');
 
 
 
-router.post('/createNewLicense', function (req, res, next) {
+router.put('/', function (req, res, next) {
     console.log('licenseService');
     console.log('req = ' + req.body.userId);
     console.log('req = ' + req.body.installedPhoneNumber);
