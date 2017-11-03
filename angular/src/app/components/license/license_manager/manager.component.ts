@@ -39,5 +39,18 @@ export class ManagerComponent implements OnInit, DoCheck {
     createNewLicense(): void {
         this.router.navigate(['./create-newLicense'])
     }
+    modifyLicense() : void {
+        this.router.navigate(['./modify-license'])
+    }
+
+    deleteLicense(licenseId : string): void {
+        this.licenseService.deleteLicense(licenseId)
+            .then(res => {
+                console.log('ManagerComponent-res = ' + JSON.stringify(res));
+            })
+            .catch(error => {
+                console.log("ManagerComponent--error = " + JSON.stringify(error));
+            })
+    }
 
 }

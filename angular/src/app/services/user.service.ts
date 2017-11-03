@@ -42,7 +42,9 @@ export class UserService {
                 console.log("As user = " + JSON.stringify(res.json().user as User));
                 this.user = res.json().user as User;
                 this.licenseService.licenses = res.json().licenses;
+
                 localStorage.setItem('user', JSON.stringify(this.user));
+
                 console.log("this.licenseService.licenses = " + JSON.stringify(this.licenseService.licenses));
                 console.log("res.json().licenses = " + JSON.stringify(res.json().licenses));
                 console.log("res.json().licenses as License[] = " + JSON.stringify(res.json().licenses as License[]));

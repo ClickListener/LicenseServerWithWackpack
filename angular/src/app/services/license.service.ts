@@ -1,7 +1,7 @@
 
 
 import {Injectable} from "@angular/core";
-import {Http,Headers} from "@angular/http";
+import {Http, Headers, RequestOptions} from "@angular/http";
 import {License} from "../model/License";
 
 import {Observable} from "rxjs";
@@ -50,6 +50,22 @@ export class LicenseService {
                 return res.json();
             })
             .catch(LicenseService.handleError);
+    }
+
+    deleteLicense(licenseID:string) : Promise<License[]> {
+        console.info("licenseID = " + licenseID);
+
+        return this.http.delete(this.url, new RequestOptions({
+            headers: this.header.headers,
+            body: {licenseId: licenseID}
+        }))
+            .toPromise()
+            .then(res=> {
+                this.licenses = res.json().licenses as License[];
+                console.info('res = ' + JSON.stringify(this.licenses));
+                return res.json();
+            })
+            .catch(LicenseService.handleError)
     }
 
 

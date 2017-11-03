@@ -33,6 +33,18 @@ var ManagerComponent = (function () {
     ManagerComponent.prototype.createNewLicense = function () {
         this.router.navigate(['./create-newLicense']);
     };
+    ManagerComponent.prototype.modifyLicense = function () {
+        this.router.navigate(['./modify-license']);
+    };
+    ManagerComponent.prototype.deleteLicense = function (licenseId) {
+        this.licenseService.deleteLicense(licenseId)
+            .then(function (res) {
+            console.log('ManagerComponent-res = ' + JSON.stringify(res));
+        })
+            .catch(function (error) {
+            console.log("ManagerComponent--error = " + JSON.stringify(error));
+        });
+    };
     return ManagerComponent;
 }());
 ManagerComponent = __decorate([

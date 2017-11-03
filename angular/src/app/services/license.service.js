@@ -44,6 +44,21 @@ var LicenseService = LicenseService_1 = (function () {
         })
             .catch(LicenseService_1.handleError);
     };
+    LicenseService.prototype.deleteLicense = function (licenseID) {
+        var _this = this;
+        console.info("licenseID = " + licenseID);
+        return this.http.delete(this.url, new http_1.RequestOptions({
+            headers: this.header.headers,
+            body: { licenseId: licenseID }
+        }))
+            .toPromise()
+            .then(function (res) {
+            _this.licenses = res.json().licenses;
+            console.info('res = ' + JSON.stringify(_this.licenses));
+            return res.json();
+        })
+            .catch(LicenseService_1.handleError);
+    };
     LicenseService.handleError = function (error) {
         console.log('An error occurred', JSON.stringify(error)); //for demo purposes only
         return Promise.reject(error.message || error);

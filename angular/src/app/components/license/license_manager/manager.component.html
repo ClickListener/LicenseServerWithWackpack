@@ -27,16 +27,18 @@
                 <th class="th-lg"><a>First Name <i class="fa fa-sort ml-1"></i></a></th>
                 <th class="th-lg"><a>Last Name<i class="fa fa-sort ml-1"></i></a></th>
                 <th class="th-lg"><a>Username<i class="fa fa-sort ml-1"></i></a></th>
+                <th class="th-lg"><button>操作</button></th>
             </tr>
             </thead>
             <!--Table head-->
 
             <!--Table body-->
             <tbody>
-            <tr *ngFor="let license of licenses">
+            <tr *ngFor="let license of licenses" (click)="modifyLicense(license._id)">
                 <th scope="row">{{license.totalUserNumber}}</th>
                 <td>{{license.devices}}</td>
                 <td>{{license.userId}}</td>
+                <td><button (click)="deleteLicense(license._id)">删除</button></td>
 
             </tr>
             </tbody>
