@@ -59,9 +59,11 @@ router.put('/', function (req, res, next) {
 });
 
 
+//更新License
 router.post('/', function (req, res) {
     console.log('licenseService');
     console.log('req = ' + req.body.userId);
+    console.log('req = ' + req.body.licenseId);
     console.log('req = ' + req.body.installedPhoneNumber);
     console.log('req = ' + req.body.totalUserNumber);
     console.log('req = ' + req.body.BundleIdOrPackageName);

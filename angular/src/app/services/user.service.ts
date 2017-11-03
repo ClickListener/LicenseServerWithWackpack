@@ -44,6 +44,7 @@ export class UserService {
                 this.licenseService.licenses = res.json().licenses;
 
                 localStorage.setItem('user', JSON.stringify(this.user));
+                localStorage.setItem('licenses', JSON.stringify(this.licenseService.licenses));
 
                 console.log("this.licenseService.licenses = " + JSON.stringify(this.licenseService.licenses));
                 console.log("res.json().licenses = " + JSON.stringify(res.json().licenses));
@@ -72,7 +73,10 @@ export class UserService {
                 console.log("res.json = " + JSON.stringify(res.json()));
                 this.user = res.json().user as User;
                 this.licenseService.licenses = res.json().licenses;
+
+
                 localStorage.setItem('user', JSON.stringify(this.user));
+                localStorage.setItem('licenses', JSON.stringify(this.licenseService.licenses));
 
 
                 return res.json().user as User;
@@ -97,7 +101,8 @@ export class UserService {
                 console.log('msg = ' + msg);
                 this.user = undefined;
                 this.licenseService.licenses = undefined;
-                localStorage.removeItem('user')
+                localStorage.removeItem('user');
+                localStorage.removeItem('licenses');
                 console.info('user = ' + this.user);
 
             })

@@ -11,17 +11,28 @@ import {UserService} from "./user.service";
 export class LicenseService {
 
 
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+        console.log('LicenseService--------constructor');
+        this.licenses = JSON.parse(localStorage.getItem('licenses'));
+        console.log('LicenseService--------licenses = ' + this.licenses);
+    }
 
     private header = {
         headers: new Headers({'Content-Type': 'application/json'})
     };
 
-
     licenses:License[];
+
+    license:License;
 
     url = '/license';
 
+
+    /**
+     * 创建 新的 License
+     * @param licenseInfo
+     * @returns {Promise<License[]>}
+     */
     createNewLicense(licenseInfo:any) : Promise<License[]> {
 
         console.info("licenseInfo = " + JSON.stringify(licenseInfo));
@@ -32,6 +43,9 @@ export class LicenseService {
             .toPromise()
             .then( res => {
                 this.licenses = res.json().licenses as License[];
+
+                //将licenses存到本地
+                localStorage.setItem('licenses' , JSON.stringify(this.licenses));
                 console.info('res = ' + JSON.stringify(this.licenses));
                 return res.json();
             })
@@ -39,6 +53,11 @@ export class LicenseService {
 
     }
 
+    /**
+     * 更新 License
+     * @param licenseInfo
+     * @returns {Promise<License[]>}
+     */
     updateLicense(licenseInfo:any) : Promise<License[]> {
         console.info("licenseInfo = " + JSON.stringify(licenseInfo));
 
@@ -46,12 +65,20 @@ export class LicenseService {
             .toPromise()
             .then(res => {
                 this.licenses = res.json().licenses as License[];
+
+                //将licenses存到本地
+                localStorage.setItem('licenses' , JSON.stringify(this.licenses));
                 console.info('res = ' + JSON.stringify(this.licenses));
                 return res.json();
             })
             .catch(LicenseService.handleError);
     }
 
+    /**
+     * 删除  License
+     * @param {string} licenseID
+     * @returns {Promise<License[]>}
+     */
     deleteLicense(licenseID:string) : Promise<License[]> {
         console.info("licenseID = " + licenseID);
 
@@ -62,6 +89,9 @@ export class LicenseService {
             .toPromise()
             .then(res=> {
                 this.licenses = res.json().licenses as License[];
+
+                //将licenses存到本地
+                localStorage.setItem('licenses' , JSON.stringify(this.licenses));
                 console.info('res = ' + JSON.stringify(this.licenses));
                 return res.json();
             })

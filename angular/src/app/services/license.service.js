@@ -18,7 +18,15 @@ var LicenseService = LicenseService_1 = (function () {
             headers: new http_1.Headers({ 'Content-Type': 'application/json' })
         };
         this.url = '/license';
+        console.log('LicenseService--------constructor');
+        this.licenses = JSON.parse(localStorage.getItem('licenses'));
+        console.log('LicenseService--------licenses = ' + this.licenses);
     }
+    /**
+     * 创建 新的 License
+     * @param licenseInfo
+     * @returns {Promise<License[]>}
+     */
     LicenseService.prototype.createNewLicense = function (licenseInfo) {
         var _this = this;
         console.info("licenseInfo = " + JSON.stringify(licenseInfo));
@@ -27,11 +35,18 @@ var LicenseService = LicenseService_1 = (function () {
             .toPromise()
             .then(function (res) {
             _this.licenses = res.json().licenses;
+            //将licenses存到本地
+            localStorage.setItem('licenses', JSON.stringify(_this.licenses));
             console.info('res = ' + JSON.stringify(_this.licenses));
             return res.json();
         })
             .catch(LicenseService_1.handleError);
     };
+    /**
+     * 更新 License
+     * @param licenseInfo
+     * @returns {Promise<License[]>}
+     */
     LicenseService.prototype.updateLicense = function (licenseInfo) {
         var _this = this;
         console.info("licenseInfo = " + JSON.stringify(licenseInfo));
@@ -39,11 +54,18 @@ var LicenseService = LicenseService_1 = (function () {
             .toPromise()
             .then(function (res) {
             _this.licenses = res.json().licenses;
+            //将licenses存到本地
+            localStorage.setItem('licenses', JSON.stringify(_this.licenses));
             console.info('res = ' + JSON.stringify(_this.licenses));
             return res.json();
         })
             .catch(LicenseService_1.handleError);
     };
+    /**
+     * 删除  License
+     * @param {string} licenseID
+     * @returns {Promise<License[]>}
+     */
     LicenseService.prototype.deleteLicense = function (licenseID) {
         var _this = this;
         console.info("licenseID = " + licenseID);
@@ -54,6 +76,8 @@ var LicenseService = LicenseService_1 = (function () {
             .toPromise()
             .then(function (res) {
             _this.licenses = res.json().licenses;
+            //将licenses存到本地
+            localStorage.setItem('licenses', JSON.stringify(_this.licenses));
             console.info('res = ' + JSON.stringify(_this.licenses));
             return res.json();
         })

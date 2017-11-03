@@ -1,7 +1,7 @@
 /**
  * Created by zhangxu on 2017/9/19.
  */
-import {Component, DoCheck, OnInit} from "@angular/core";
+import {Component, DoCheck, OnChanges, OnInit} from "@angular/core";
 import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
 import {User} from "../../../model/User";
@@ -28,10 +28,11 @@ export class ManagerComponent implements OnInit, DoCheck {
         this.user = this.userService.user;
     }
 
+
     ngDoCheck(): void {
 
         this.licenses = this.licenseService.licenses;
-        console.log('this.license !== []' + (this.licenses.length === 0));
+
         console.info("this.licenses = " + JSON.stringify(this.licenses));
 
     }
@@ -39,11 +40,23 @@ export class ManagerComponent implements OnInit, DoCheck {
     createNewLicense(): void {
         this.router.navigate(['./create-newLicense'])
     }
-    modifyLicense() : void {
-        this.router.navigate(['./modify-license'])
+
+    modifyLicense(licenseId: string, installedPhoneNumber: number, totalUserNumber: number, BundleIdOrPackageName: string): void {
+
+
+        let license = new License();
+
+        license._id = licenseId;
+        license.installedPhoneNumber = installedPhoneNumber;
+        license.totalUserNumber = totalUserNumber;
+        license.BundleIdOrPackageName = BundleIdOrPackageName;
+
+        this.licenseService.license = license;
+
+        this.router.navigate(['./modify-license']);
     }
 
-    deleteLicense(licenseId : string): void {
+    deleteLicense(licenseId: string,): void {
         this.licenseService.deleteLicense(licenseId)
             .then(res => {
                 console.log('ManagerComponent-res = ' + JSON.stringify(res));

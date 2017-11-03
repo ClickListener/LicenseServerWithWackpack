@@ -16,6 +16,7 @@ var core_1 = require("@angular/core");
 var user_service_1 = require("../../../services/user.service");
 var router_1 = require("@angular/router");
 var license_service_1 = require("../../../services/license.service");
+var License_1 = require("../../../model/License");
 var ManagerComponent = (function () {
     function ManagerComponent(userService, router, licenseService) {
         this.userService = userService;
@@ -27,13 +28,18 @@ var ManagerComponent = (function () {
     };
     ManagerComponent.prototype.ngDoCheck = function () {
         this.licenses = this.licenseService.licenses;
-        console.log('this.license !== []' + (this.licenses.length === 0));
         console.info("this.licenses = " + JSON.stringify(this.licenses));
     };
     ManagerComponent.prototype.createNewLicense = function () {
         this.router.navigate(['./create-newLicense']);
     };
-    ManagerComponent.prototype.modifyLicense = function () {
+    ManagerComponent.prototype.modifyLicense = function (licenseId, installedPhoneNumber, totalUserNumber, BundleIdOrPackageName) {
+        var license = new License_1.License();
+        license._id = licenseId;
+        license.installedPhoneNumber = installedPhoneNumber;
+        license.totalUserNumber = totalUserNumber;
+        license.BundleIdOrPackageName = BundleIdOrPackageName;
+        this.licenseService.license = license;
         this.router.navigate(['./modify-license']);
     };
     ManagerComponent.prototype.deleteLicense = function (licenseId) {

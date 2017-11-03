@@ -34,7 +34,8 @@
 
             <!--Table body-->
             <tbody>
-            <tr *ngFor="let license of licenses" (click)="modifyLicense(license._id)">
+            <tr *ngFor="let license of licenses" (click)="modifyLicense(license._id, license.installedPhoneNumber,
+            license.totalUserNumber, license.BundleIdOrPackageName)">
                 <th scope="row">{{license.totalUserNumber}}</th>
                 <td>{{license.devices}}</td>
                 <td>{{license.userId}}</td>
