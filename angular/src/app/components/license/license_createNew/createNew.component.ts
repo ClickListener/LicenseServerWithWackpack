@@ -4,8 +4,11 @@
 import {Component, DoCheck, OnInit} from "@angular/core";
 import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
-import {User} from "../../../model/User";
 import {LicenseService} from "../../../services/license.service";
+
+import swal from 'sweetalert2';
+
+
 @Component({
     selector: 'create-newLicense',
     templateUrl: './createNew.component.html',
@@ -43,7 +46,16 @@ export class CreateNewComponent implements OnInit, DoCheck{
             .then( res => {
                 console.info('res = ' + JSON.stringify(res));
                 //保存成功，跳转到管理界面
+                //保存成功，跳转到管理界面
                 this.router.navigate(['/manager-license']);
+
+                swal({
+                    position: 'bottom-right',
+                    type: 'success',
+                    title: 'Add new license successfully',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).catch(swal.noop)
 
         })
             .catch(err => {

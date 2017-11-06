@@ -17,6 +17,7 @@ var user_service_1 = require("../../../services/user.service");
 var router_1 = require("@angular/router");
 var license_service_1 = require("../../../services/license.service");
 var License_1 = require("../../../model/License");
+var sweetalert2_1 = require("sweetalert2");
 var ManagerComponent = (function () {
     function ManagerComponent(userService, router, licenseService) {
         this.userService = userService;
@@ -43,13 +44,25 @@ var ManagerComponent = (function () {
         this.router.navigate(['./modify-license']);
     };
     ManagerComponent.prototype.deleteLicense = function (licenseId) {
-        this.licenseService.deleteLicense(licenseId)
-            .then(function (res) {
-            console.log('ManagerComponent-res = ' + JSON.stringify(res));
-        })
-            .catch(function (error) {
-            console.log("ManagerComponent--error = " + JSON.stringify(error));
-        });
+        console.log('deleteLicense()');
+        var self = this;
+        sweetalert2_1.default({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(function () {
+            self.licenseService.deleteLicense(licenseId)
+                .then(function (res) {
+                sweetalert2_1.default('Deleted!', 'Your file has been deleted.', 'success');
+            })
+                .catch(function (error) {
+                console.log("ManagerComponent--error = " + JSON.stringify(error));
+            });
+        }).catch(sweetalert2_1.default.noop);
     };
     return ManagerComponent;
 }());

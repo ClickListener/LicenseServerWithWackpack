@@ -14,17 +14,16 @@ import {UserService} from "../../../services/user.service";
 
 export class ModifyComponent {
 
-
-
     license:License;
 
-    constructor(private licenseService:LicenseService, private userService:UserService) {
+    constructor(private licenseService:LicenseService, private userService:UserService, private router:Router) {
         this.license = licenseService.license;
 
         console.log('ModifyComponent---------license = ' + JSON.stringify(this.license));
     }
 
 
+    //更新License
     updateLicense() {
         this.licenseService.updateLicense({
             'userId': this.userService.user._id,
@@ -33,5 +32,13 @@ export class ModifyComponent {
             'totalUserNumber': this.license.totalUserNumber,
             'BundleIdOrPackageName': this.license.BundleIdOrPackageName
         })
+            .then(res => {
+            console.info('res = ' + JSON.stringify(res));
+            //保存成功，跳转到管理界面
+            this.router.navigate(['/manager-license']);
+        })
+            .catch(error => {
+                console.info('error = ' + JSON.stringify(error));
+            })
     }
 }

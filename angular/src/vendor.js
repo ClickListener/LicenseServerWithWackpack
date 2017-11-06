@@ -15,4 +15,5 @@ require("rxjs");
 require("mdbootstrap/css/bootstrap.css");
 require("mdbootstrap/css/mdb.css");
 require("mdbootstrap/css/style.css");
+require("sweetalert2/dist/sweetalert2.css");
 //# sourceMappingURL=vendor.js.map

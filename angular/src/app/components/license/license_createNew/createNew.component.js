@@ -16,6 +16,7 @@ var core_1 = require("@angular/core");
 var user_service_1 = require("../../../services/user.service");
 var router_1 = require("@angular/router");
 var license_service_1 = require("../../../services/license.service");
+var sweetalert2_1 = require("sweetalert2");
 var CreateNewComponent = (function () {
     function CreateNewComponent(userService, router, licenseService) {
         this.userService = userService;
@@ -43,7 +44,15 @@ var CreateNewComponent = (function () {
             .then(function (res) {
             console.info('res = ' + JSON.stringify(res));
             //保存成功，跳转到管理界面
+            //保存成功，跳转到管理界面
             _this.router.navigate(['/manager-license']);
+            sweetalert2_1.default({
+                position: 'bottom-right',
+                type: 'success',
+                title: 'Add new license successfully',
+                showConfirmButton: false,
+                timer: 2000
+            }).catch(sweetalert2_1.default.noop);
         })
             .catch(function (err) {
             console.info('error = ' + err);

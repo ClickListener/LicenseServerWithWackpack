@@ -23,10 +23,10 @@
             <!--Table head-->
             <thead>
             <tr>
-                <th scope="row">#</th>
-                <th class="th-lg"><a>First Name <i class="fa fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>Last Name<i class="fa fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>Username<i class="fa fa-sort ml-1"></i></a></th>
+                <th class="th-lg"><a>id <i class="fa fa-sort ml-1"></i></a></th>
+                <th class="th-lg"><a>installedPhoneNumber<i class="fa fa-sort ml-1"></i></a></th>
+                <th class="th-lg"><a>totalUserNumber<i class="fa fa-sort ml-1"></i></a></th>
+                <th class="th-lg"><a>BundleIdOrPackageName<i class="fa fa-sort ml-1"></i></a></th>
                 <th class="th-lg"><button>操作</button></th>
             </tr>
             </thead>
@@ -34,12 +34,16 @@
 
             <!--Table body-->
             <tbody>
-            <tr *ngFor="let license of licenses" (click)="modifyLicense(license._id, license.installedPhoneNumber,
-            license.totalUserNumber, license.BundleIdOrPackageName)">
-                <th scope="row">{{license.totalUserNumber}}</th>
-                <td>{{license.devices}}</td>
-                <td>{{license.userId}}</td>
-                <td><button (click)="deleteLicense(license._id)">删除</button></td>
+            <tr *ngFor="let license of licenses" >
+                <td scope="row" (click)="modifyLicense(license._id, license.installedPhoneNumber,
+            license.totalUserNumber, license.BundleIdOrPackageName)">{{license._id}}</td>
+                <td scope="row" (click)="modifyLicense(license._id, license.installedPhoneNumber,
+            license.totalUserNumber, license.BundleIdOrPackageName)">{{license.installedPhoneNumber}}</td>
+                <td scope="row" (click)="modifyLicense(license._id, license.installedPhoneNumber,
+            license.totalUserNumber, license.BundleIdOrPackageName)">{{license.totalUserNumber}}</td>
+                <td scope="row" (click)="modifyLicense(license._id, license.installedPhoneNumber,
+            license.totalUserNumber, license.BundleIdOrPackageName)">{{license.BundleIdOrPackageName}}</td>
+                <td scope="row"><button (click)="deleteLicense(license._id)">删除</button></td>
 
             </tr>
             </tbody>
