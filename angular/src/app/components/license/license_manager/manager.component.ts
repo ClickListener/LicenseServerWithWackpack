@@ -22,6 +22,57 @@ export class ManagerComponent implements OnInit, DoCheck {
     user: User;
     licenses: License[];
 
+    licenses_fake = [
+        {
+            "ExpiredDate":"2017-10-10",
+            "DeviceInfo": [
+                {
+                    "DeviceModel": "BP5",
+                    "DeviceTotalNumber": 100,
+                    "DeviceUsedNumber": 1,
+                },
+                {
+                    "DeviceModel": "AM4",
+                    "DeviceTotalNumber": 200,
+                    "DeviceUsedNumber": 1,
+                }
+            ],
+            "InstalledPhoneNumber": 1000
+        },
+        {
+            "ExpiredDate":"2017-10-10",
+            "DeviceInfo": [
+                {
+                    "DeviceModel": "BP5",
+                    "DeviceTotalNumber": 100,
+                    "DeviceUsedNumber": 1,
+                },
+                {
+                    "DeviceModel": "AM4",
+                    "DeviceTotalNumber": 200,
+                    "DeviceUsedNumber": 1,
+                }
+            ],
+            "InstalledPhoneNumber": 1000
+        },
+        {
+            "ExpiredDate":"2017-10-10",
+            "DeviceInfo": [
+                {
+                    "DeviceModel": "BP5",
+                    "DeviceTotalNumber": 100,
+                    "DeviceUsedNumber": 1,
+                },
+                {
+                    "DeviceModel": "AM4",
+                    "DeviceTotalNumber": 200,
+                    "DeviceUsedNumber": 1,
+                }
+            ],
+            "InstalledPhoneNumber": 1000
+        }
+    ]
+
     constructor(private userService: UserService, private router: Router, private licenseService: LicenseService) {
     }
 

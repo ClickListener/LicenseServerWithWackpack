@@ -23,6 +23,56 @@ var ManagerComponent = (function () {
         this.userService = userService;
         this.router = router;
         this.licenseService = licenseService;
+        this.licenses_fake = [
+            {
+                "ExpiredDate": "2017-10-10",
+                "DeviceInfo": [
+                    {
+                        "DeviceModel": "BP5",
+                        "DeviceTotalNumber": 100,
+                        "DeviceUsedNumber": 1,
+                    },
+                    {
+                        "DeviceModel": "AM4",
+                        "DeviceTotalNumber": 200,
+                        "DeviceUsedNumber": 1,
+                    }
+                ],
+                "InstalledPhoneNumber": 1000
+            },
+            {
+                "ExpiredDate": "2017-10-10",
+                "DeviceInfo": [
+                    {
+                        "DeviceModel": "BP5",
+                        "DeviceTotalNumber": 100,
+                        "DeviceUsedNumber": 1,
+                    },
+                    {
+                        "DeviceModel": "AM4",
+                        "DeviceTotalNumber": 200,
+                        "DeviceUsedNumber": 1,
+                    }
+                ],
+                "InstalledPhoneNumber": 1000
+            },
+            {
+                "ExpiredDate": "2017-10-10",
+                "DeviceInfo": [
+                    {
+                        "DeviceModel": "BP5",
+                        "DeviceTotalNumber": 100,
+                        "DeviceUsedNumber": 1,
+                    },
+                    {
+                        "DeviceModel": "AM4",
+                        "DeviceTotalNumber": 200,
+                        "DeviceUsedNumber": 1,
+                    }
+                ],
+                "InstalledPhoneNumber": 1000
+            }
+        ];
     }
     ManagerComponent.prototype.ngOnInit = function () {
         this.user = this.userService.user;

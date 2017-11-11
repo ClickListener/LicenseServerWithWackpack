@@ -15,42 +15,94 @@
     </div>
     <!--/Card image-->
 
-    <div class="px-4" *ngIf="licenses.length !== 0">
+    <!--Accordion wrapper-->
+    <div class="accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
 
-        <!--Table-->
-        <table class="table table-hover mb-0">
 
-            <!--Table head-->
-            <thead>
-            <tr>
-                <th class="th-lg"><a>id <i class="fa fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>installedPhoneNumber<i class="fa fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>totalUserNumber<i class="fa fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>BundleIdOrPackageName<i class="fa fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><button>操作</button></th>
-            </tr>
-            </thead>
-            <!--Table head-->
+        <div class="container">
+            <div class="row">
+                <div class="col-4 text-center">
+                    ExpiredDate
+                </div>
+                <div class="col-2 text-center">
+                    Devices
+                </div>
+                <div class="col-2 text-center">
+                    InstallPhoneNumber
+                </div>
+                <div class="col-4 text-center">
+                    Operation
+                </div>
+            </div>
 
-            <!--Table body-->
-            <tbody>
-            <tr *ngFor="let license of licenses" >
-                <td scope="row" (click)="modifyLicense(license._id, license.installedPhoneNumber,
-            license.totalUserNumber, license.BundleIdOrPackageName)">{{license._id}}</td>
-                <td scope="row" (click)="modifyLicense(license._id, license.installedPhoneNumber,
-            license.totalUserNumber, license.BundleIdOrPackageName)">{{license.installedPhoneNumber}}</td>
-                <td scope="row" (click)="modifyLicense(license._id, license.installedPhoneNumber,
-            license.totalUserNumber, license.BundleIdOrPackageName)">{{license.totalUserNumber}}</td>
-                <td scope="row" (click)="modifyLicense(license._id, license.installedPhoneNumber,
-            license.totalUserNumber, license.BundleIdOrPackageName)">{{license.BundleIdOrPackageName}}</td>
-                <td scope="row"><button (click)="deleteLicense(license._id)">删除</button></td>
 
-            </tr>
-            </tbody>
-            <!--Table body-->
-        </table>
+            <hr>
+
+
+            <!-- Accordion card -->
+            <div class="card" *ngFor="let license of licenses_fake; let i = index">
+
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingOne">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" [attr.data-target]="'#'+ i"
+                       arrt.aria-expanded="false">
+                        <div class="row">
+                            <div class="col-4 text-center">
+                                {{license.ExpiredDate}}
+                            </div>
+                            <div class="col-2 text-center">
+                                {{license.DeviceInfo.length}}
+                            </div>
+                            <div class="col-2 text-center">
+                                {{license.InstalledPhoneNumber}}
+                            </div>
+                            <div class="col-4 text-center">
+                                <button>删除</button>
+                            </div>
+                            <i class="fa fa-angle-down rotate-icon" ></i>
+                        </div>
+
+                    </a>
+                </div>
+
+                <!-- Card body -->
+                <div [attr.id]="i" class="collapse" role="tabpanel">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4 text-center">
+                                <b>DeviceModel</b>
+                            </div>
+                            <div class="col-4 text-center">
+                                <b>TotalNumber</b>
+                            </div>
+                            <div class="col-4 text-center">
+                                <b>UsedNumber</b>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngFor="let device of license.DeviceInfo">
+                            <div class="col-4 text-center">
+                                <b>{{device.DeviceModel}}</b>
+                            </div>
+                            <div class="col-4 text-center">
+                                <b>{{device.DeviceTotalNumber}}</b>
+                            </div>
+                            <div class="col-4 text-center">
+                                <b>{{device.DeviceUsedNumber}}</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <!-- Accordion card -->
 
     </div>
+    <!--/.Accordion wrapper-->
 
     <hr class="my-0">
 
