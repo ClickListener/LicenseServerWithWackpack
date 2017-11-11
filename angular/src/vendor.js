@@ -16,4 +16,5 @@ require("mdbootstrap/css/bootstrap.css");
 require("mdbootstrap/css/mdb.css");
 require("mdbootstrap/css/style.css");
 require("sweetalert2/dist/sweetalert2.css");
+require("mdbootstrap/css/font-awesome.css");
 //# sourceMappingURL=vendor.js.map

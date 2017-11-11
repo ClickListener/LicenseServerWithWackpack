@@ -19,7 +19,7 @@ var LicenseService = LicenseService_1 = (function () {
         };
         this.url = '/license';
         console.log('LicenseService--------constructor');
-        this.licenses = JSON.parse(localStorage.getItem('licenses'));
+        this.licenses = JSON.parse(sessionStorage.getItem('licenses'));
         console.log('LicenseService--------licenses = ' + this.licenses);
     }
     /**
@@ -36,7 +36,7 @@ var LicenseService = LicenseService_1 = (function () {
             .then(function (res) {
             _this.licenses = res.json().licenses;
             //将licenses存到本地
-            localStorage.setItem('licenses', JSON.stringify(_this.licenses));
+            sessionStorage.setItem('licenses', JSON.stringify(_this.licenses));
             console.info('res = ' + JSON.stringify(_this.licenses));
             return res.json();
         })
@@ -55,7 +55,7 @@ var LicenseService = LicenseService_1 = (function () {
             .then(function (res) {
             _this.licenses = res.json().licenses;
             //将licenses存到本地
-            localStorage.setItem('licenses', JSON.stringify(_this.licenses));
+            sessionStorage.setItem('licenses', JSON.stringify(_this.licenses));
             console.info('res = ' + JSON.stringify(_this.licenses));
             return res.json();
         })
@@ -77,7 +77,7 @@ var LicenseService = LicenseService_1 = (function () {
             .then(function (res) {
             _this.licenses = res.json().licenses;
             //将licenses存到本地
-            localStorage.setItem('licenses', JSON.stringify(_this.licenses));
+            sessionStorage.setItem('licenses', JSON.stringify(_this.licenses));
             console.info('res = ' + JSON.stringify(_this.licenses));
             return res.json();
         })

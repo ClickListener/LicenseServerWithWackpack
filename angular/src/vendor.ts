@@ -15,7 +15,8 @@ import 'rxjs';
 import 'mdbootstrap/css/bootstrap.css';
 import 'mdbootstrap/css/mdb.css';
 import 'mdbootstrap/css/style.css';
-import 'sweetalert2/dist/sweetalert2.css'
+import 'sweetalert2/dist/sweetalert2.css';
+import 'mdbootstrap/css/font-awesome.css'
 
 
 

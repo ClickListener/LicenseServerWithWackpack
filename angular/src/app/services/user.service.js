@@ -23,7 +23,7 @@ var UserService = UserService_1 = (function () {
             headers: new http_1.Headers({ 'Content-Type': 'application/json' })
         };
         console.log('UserService--------constructor');
-        this.user = JSON.parse(localStorage.getItem('user'));
+        this.user = JSON.parse(sessionStorage.getItem('user'));
         console.log('UserService--------user = ' + this.user);
     }
     /**
@@ -41,8 +41,8 @@ var UserService = UserService_1 = (function () {
             console.log("As user = " + JSON.stringify(res.json().user));
             _this.user = res.json().user;
             _this.licenseService.licenses = res.json().licenses;
-            localStorage.setItem('user', JSON.stringify(_this.user));
-            localStorage.setItem('licenses', JSON.stringify(_this.licenseService.licenses));
+            sessionStorage.setItem('user', JSON.stringify(_this.user));
+            sessionStorage.setItem('licenses', JSON.stringify(_this.licenseService.licenses));
             console.log("this.licenseService.licenses = " + JSON.stringify(_this.licenseService.licenses));
             console.log("res.json().licenses = " + JSON.stringify(res.json().licenses));
             console.log("res.json().licenses as License[] = " + JSON.stringify(res.json().licenses));
@@ -66,8 +66,8 @@ var UserService = UserService_1 = (function () {
             console.log("res.json = " + JSON.stringify(res.json()));
             _this.user = res.json().user;
             _this.licenseService.licenses = res.json().licenses;
-            localStorage.setItem('user', JSON.stringify(_this.user));
-            localStorage.setItem('licenses', JSON.stringify(_this.licenseService.licenses));
+            sessionStorage.setItem('user', JSON.stringify(_this.user));
+            sessionStorage.setItem('licenses', JSON.stringify(_this.licenseService.licenses));
             return res.json().user;
         })
             .catch(UserService_1.handleError);
@@ -85,8 +85,8 @@ var UserService = UserService_1 = (function () {
             console.log('msg = ' + msg);
             _this.user = undefined;
             _this.licenseService.licenses = undefined;
-            localStorage.removeItem('user');
-            localStorage.removeItem('licenses');
+            sessionStorage.removeItem('user');
+            sessionStorage.removeItem('licenses');
             console.info('user = ' + _this.user);
         })
             .catch(UserService_1.handleError);

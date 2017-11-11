@@ -16,7 +16,7 @@ export class UserService {
 
     constructor(private http : Http, private licenseService:LicenseService) {
         console.log('UserService--------constructor');
-        this.user = JSON.parse(localStorage.getItem('user'));
+        this.user = JSON.parse(sessionStorage.getItem('user'));
         console.log('UserService--------user = ' + this.user);
     }
 
@@ -43,8 +43,8 @@ export class UserService {
                 this.user = res.json().user as User;
                 this.licenseService.licenses = res.json().licenses;
 
-                localStorage.setItem('user', JSON.stringify(this.user));
-                localStorage.setItem('licenses', JSON.stringify(this.licenseService.licenses));
+                sessionStorage.setItem('user', JSON.stringify(this.user));
+                sessionStorage.setItem('licenses', JSON.stringify(this.licenseService.licenses));
 
                 console.log("this.licenseService.licenses = " + JSON.stringify(this.licenseService.licenses));
                 console.log("res.json().licenses = " + JSON.stringify(res.json().licenses));
@@ -75,8 +75,8 @@ export class UserService {
                 this.licenseService.licenses = res.json().licenses;
 
 
-                localStorage.setItem('user', JSON.stringify(this.user));
-                localStorage.setItem('licenses', JSON.stringify(this.licenseService.licenses));
+                sessionStorage.setItem('user', JSON.stringify(this.user));
+                sessionStorage.setItem('licenses', JSON.stringify(this.licenseService.licenses));
 
 
                 return res.json().user as User;
@@ -101,8 +101,8 @@ export class UserService {
                 console.log('msg = ' + msg);
                 this.user = undefined;
                 this.licenseService.licenses = undefined;
-                localStorage.removeItem('user');
-                localStorage.removeItem('licenses');
+                sessionStorage.removeItem('user');
+                sessionStorage.removeItem('licenses');
                 console.info('user = ' + this.user);
 
             })

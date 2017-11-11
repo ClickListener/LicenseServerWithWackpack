@@ -13,7 +13,7 @@ export class LicenseService {
 
     constructor(private http: Http) {
         console.log('LicenseService--------constructor');
-        this.licenses = JSON.parse(localStorage.getItem('licenses'));
+        this.licenses = JSON.parse(sessionStorage.getItem('licenses'));
         console.log('LicenseService--------licenses = ' + this.licenses);
     }
 
@@ -45,7 +45,7 @@ export class LicenseService {
                 this.licenses = res.json().licenses as License[];
 
                 //将licenses存到本地
-                localStorage.setItem('licenses' , JSON.stringify(this.licenses));
+                sessionStorage.setItem('licenses' , JSON.stringify(this.licenses));
                 console.info('res = ' + JSON.stringify(this.licenses));
                 return res.json();
             })
@@ -67,7 +67,7 @@ export class LicenseService {
                 this.licenses = res.json().licenses as License[];
 
                 //将licenses存到本地
-                localStorage.setItem('licenses' , JSON.stringify(this.licenses));
+                sessionStorage.setItem('licenses' , JSON.stringify(this.licenses));
                 console.info('res = ' + JSON.stringify(this.licenses));
                 return res.json();
             })
@@ -91,7 +91,7 @@ export class LicenseService {
                 this.licenses = res.json().licenses as License[];
 
                 //将licenses存到本地
-                localStorage.setItem('licenses' , JSON.stringify(this.licenses));
+                sessionStorage.setItem('licenses' , JSON.stringify(this.licenses));
                 console.info('res = ' + JSON.stringify(this.licenses));
                 return res.json();
             })
