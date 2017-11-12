@@ -13,23 +13,24 @@
             </div>
 
 
-            <div class="md-form">
-                <input required="required" class="form-control" id="totalUserNumber" type="number" #totalUserNumber>
-                <label for="totalUserNumber">TotalUserNumber</label>
+
+            <div class="wrap">
+                <div *ngFor="let device of selectedDevices let i = index">
+
+                    <div class="customBlock">
+                        <img src="/src/assets/images/device_{{device.deviceName}}.png"/>
+
+                        <div>
+                            <p>DeviceModule: {{device.deviceName}}</p>
+                            <p>DeviceNumber: {{device.deviceNumber}}</p>
+                        </div>
+                        <input type="button" class="cancel" (click)="aa()"></input>
+                    </div>
+                </div>
             </div>
 
-            <div class="md-form">
-                <input required="required" class="form-control" id="BundleIdOrPackageName" type="text" #BundleIdOrPackageName>
-                <label for="BundleIdOrPackageName">BundleIdOrPackageName</label>
-            </div>
 
-            <div *ngFor="let device of selectedDevices let i = index">
-                <p>{{device.deviceName}}</p>
-                <p>{{device.deviceNumber}}</p>
-                <button (click)="deleteDevice(i)">删除</button>
-            </div>
-
-            <button (click)="createNewLicense(installedPhoneNumber.value, totalUserNumber.value, selectedDevices)">提交</button>
+            <button (click)="createNewLicense(totalUserNumber.value, selectedDevices)">提交</button>
         </div>
 
 
@@ -44,38 +45,48 @@
             <div class="modal-content">
                 <div class="modal-body">
 
-                    <div class="md-form">
-                        <input required="required" class="form-control" id="deviceNumber" type="text" #deviceNumber>
-                        <label for="deviceNumber">deviceNumber</label>
-                    </div>
-                    <P>已经选择的设备</P>
-                    <div class="row">
-                        <div *ngFor="let key of devices;let i = index;">
-                            <div class="device" *ngIf="key.selected && !key.out_select" (click)="cancelSelectDevice(i)">
-                                <img src="/src/assets/images/device_{{key.deviceName}}.png" width="75">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="offset-md-3 col-md-6">
+
+                                <div class="md-form">
+                                    <input required="required" class="form-control" id="deviceNumber" type="text" #deviceNumber>
+                                    <label for="deviceNumber">deviceNumber</label>
+                                </div>
+                                <P class="text-lg-center">已经选择的设备</P>
+                                <div class="row">
+                                    <div *ngFor="let key of devices;let i = index;">
+                                        <div class="device" *ngIf="key.selected && !key.out_select" (click)="cancelSelectDevice(i)">
+                                            <img src="/src/assets/images/device_{{key.deviceName}}.png" width="75">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="selectedDeviceNumber === 0"  class="align-content-lg-center">
+                                        <b>You have not select a device!</b>
+                                    </div>
+                                </div>
+
+                                <p class="text-lg-center">未选择的设备</p>
+                                <div class="row">
+                                    <div *ngFor="let key of devices;let i = index">
+                                        <div class="device" *ngIf="!key.selected && !key.out_selected" (click)="selectDevice(i)">
+                                            <img src="/src/assets/images/device_{{key.deviceName}}.png" width="75">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <button class="btn btn-primary" (click)="confirmDevices(deviceNumber.value)">确定</button>
+                                    <button class="btn btn-blue-grey" data-dismiss="modal">取消</button>
+
+                                </div>
                             </div>
-                        </div>
-                        <div *ngIf="selectedDeviceNumber === 0"  class="align-content-lg-center">
-                            <b>You have not select a device!</b>
+
                         </div>
                     </div>
 
-                    <p>未选择的设备</p>
-                    <div class="row">
-                        <div *ngFor="let key of devices;let i = index">
-                            <div class="device" *ngIf="!key.selected && !key.out_selected" (click)="selectDevice(i)">
-                                <img src="/src/assets/images/device_{{key.deviceName}}.png" width="75">
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="row">
-                        <button class="btn btn-primary" (click)="confirmDevices(deviceNumber.value)">确定</button>
-                        <button class="btn btn-blue-grey" data-dismiss="modal">取消</button>
-
-                    </div>
                 </div>
             </div>
         </div>

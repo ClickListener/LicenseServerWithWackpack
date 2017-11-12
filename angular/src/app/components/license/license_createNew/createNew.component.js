@@ -98,16 +98,14 @@ var CreateNewComponent = (function () {
             }
         }
     };
-    CreateNewComponent.prototype.createNewLicense = function (installedPhoneNumber, totalUserNumber, selectedDevices) {
+    CreateNewComponent.prototype.createNewLicense = function (totalUserNumber, selectedDevices) {
         var _this = this;
         console.info('createNewLicense()');
         console.info('userId = ' + this.userService.user._id);
-        console.info('installedPhoneNumber = ' + installedPhoneNumber);
         console.info('totalUserNumber = ' + totalUserNumber);
         console.info('BundleIdOrPackageName = ' + JSON.stringify(selectedDevices));
         this.licenseService.createNewLicense({
             "userId": this.userService.user._id,
-            "installedPhoneNumber": installedPhoneNumber,
             "totalUserNumber": totalUserNumber,
             "selectedDevices": selectedDevices
         })

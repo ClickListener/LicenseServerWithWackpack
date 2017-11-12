@@ -27,6 +27,7 @@ export class CreateNewComponent implements OnInit, DoCheck{
 
     constructor(private userService : UserService, private router: Router, private licenseService : LicenseService){
         console.log('createNew----------constructor()');
+
     }
 
 
@@ -97,6 +98,8 @@ export class CreateNewComponent implements OnInit, DoCheck{
             }
         }
 
+
+
         console.log('selectedDevice = ' + JSON.stringify(this.selectedDevices));
 
         //使modal隐藏
@@ -120,16 +123,14 @@ export class CreateNewComponent implements OnInit, DoCheck{
 
 
 
-    createNewLicense(installedPhoneNumber:number, totalUserNumber:number, selectedDevices:Device[]) : void {
+    createNewLicense(totalUserNumber:number, selectedDevices:Device[]) : void {
         console.info('createNewLicense()');
         console.info('userId = ' + this.userService.user._id);
-        console.info('installedPhoneNumber = ' + installedPhoneNumber );
         console.info('totalUserNumber = ' + totalUserNumber );
         console.info('BundleIdOrPackageName = ' + JSON.stringify(selectedDevices) );
 
         this.licenseService.createNewLicense({
             "userId":this.userService.user._id,
-            "installedPhoneNumber": installedPhoneNumber,
             "totalUserNumber": totalUserNumber,
             "selectedDevices": selectedDevices
 
