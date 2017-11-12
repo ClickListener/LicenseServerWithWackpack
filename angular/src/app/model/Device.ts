@@ -4,11 +4,6 @@
 
 export class Device {
 
-    expiredDate: string;
-    deviceModule: {
-        series: string,
-        deviceName: string,
-        displayName: string
-    };
+    deviceName: string
     deviceNumber: number
 }

@@ -22,24 +22,94 @@ var CreateNewComponent = (function () {
         this.userService = userService;
         this.router = router;
         this.licenseService = licenseService;
+        //总的Devices
+        this.devices = [
+            {
+                deviceName: 'bp3m',
+                selected: false,
+                out_selected: false
+            },
+            {
+                deviceName: 'bp3l',
+                selected: false,
+                out_selected: false
+            },
+            {
+                deviceName: 'bp5',
+                selected: false,
+                out_selected: false
+            },
+            {
+                deviceName: 'bp7',
+                selected: false,
+                out_selected: false
+            }
+        ];
+        //主界面存放Devices的数组
+        this.selectedDevices = [];
+        //次级界面已选择设备的个数，为了显示未选择设备
+        this.selectedDeviceNumber = 0;
         console.log('createNew----------constructor()');
     }
     CreateNewComponent.prototype.ngDoCheck = function () {
     };
     CreateNewComponent.prototype.ngOnInit = function () {
     };
-    CreateNewComponent.prototype.createNewLicense = function (installedPhoneNumber, totalUserNumber, BundleIdOrPackageName) {
+    CreateNewComponent.prototype.selectDevice = function (index) {
+        console.log('selectDevice()');
+        this.devices[index].selected = true;
+        this.selectedDeviceNumber++;
+    };
+    CreateNewComponent.prototype.cancelSelectDevice = function (index) {
+        console.log('cancelSelectDevice()');
+        this.devices[index].selected = false;
+        this.selectedDeviceNumber--;
+    };
+    //选择device界面的 确定 按钮事件
+    CreateNewComponent.prototype.confirmDevices = function (deviceNumber) {
+        console.log('deviceNumber = ' + deviceNumber);
+        for (var _i = 0, _a = this.devices; _i < _a.length; _i++) {
+            var device = _a[_i];
+            if (device.selected) {
+                //选择设备的状态（当选择完设备，点击确定，则内部的选择状态置为FALSE，外部的选择状态置为TRUE）
+                device.out_selected = true;
+                device.selected = false;
+                var selectedDevice = {
+                    deviceName: device.deviceName,
+                    deviceNumber: deviceNumber
+                };
+                this.selectedDevices.push(selectedDevice);
+            }
+        }
+        console.log('selectedDevice = ' + JSON.stringify(this.selectedDevices));
+        //使modal隐藏
+        jQuery('#modalQuickView').modal('hide');
+    };
+    //外部 删除某一device
+    CreateNewComponent.prototype.deleteDevice = function (index) {
+        var deleteDevice = this.selectedDevices.splice(index, 1);
+        console.log('deleteDevice = ' + JSON.stringify(deleteDevice));
+        for (var _i = 0, _a = this.devices; _i < _a.length; _i++) {
+            var device = _a[_i];
+            if (device.deviceName === deleteDevice[0].deviceName) {
+                console.log('delete success');
+                //删除某一设备，将device的外部选择状态置为FALSE
+                device.out_selected = false;
+            }
+        }
+    };
+    CreateNewComponent.prototype.createNewLicense = function (installedPhoneNumber, totalUserNumber, selectedDevices) {
         var _this = this;
         console.info('createNewLicense()');
         console.info('userId = ' + this.userService.user._id);
         console.info('installedPhoneNumber = ' + installedPhoneNumber);
         console.info('totalUserNumber = ' + totalUserNumber);
-        console.info('BundleIdOrPackageName = ' + BundleIdOrPackageName);
+        console.info('BundleIdOrPackageName = ' + JSON.stringify(selectedDevices));
         this.licenseService.createNewLicense({
             "userId": this.userService.user._id,
             "installedPhoneNumber": installedPhoneNumber,
             "totalUserNumber": totalUserNumber,
-            "BundleIdOrPackageName": BundleIdOrPackageName
+            "selectedDevices": selectedDevices
         })
             .then(function (res) {
             console.info('res = ' + JSON.stringify(res));
