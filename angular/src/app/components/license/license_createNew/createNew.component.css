@@ -17,7 +17,17 @@
 
 .customBlock p {
     font-size: 12px;
-    margin: 6px;
+    margin: 6px 0px 6px 0px;
+    display: inline;
+}
+
+.customBlock input {
+    display: inline;
+    font-size: 12px;
+    width: 30px;
+    margin: 0px;
+    padding: 0px;
+
 }
 
 

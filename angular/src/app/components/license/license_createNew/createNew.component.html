@@ -22,7 +22,10 @@
 
                         <div>
                             <p>DeviceModule: {{device.deviceName}}</p>
-                            <p>DeviceNumber: {{device.deviceNumber}}</p>
+                            <div>
+                                <p>DeviceNumber:</p>
+                                <input class="form-control" id="device_number" type="number" [(ngModel)]="device.deviceNumber">
+                            </div>
                         </div>
                         <input type="button" class="cancel" (click)="aa()"></input>
                     </div>
