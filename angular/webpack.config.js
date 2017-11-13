@@ -18,7 +18,7 @@ module.exports = {
     entry: {
         'polyfills': helper.root('src', 'polyfills.ts'),
         'vendor': [
-            helper.root('src', 'vendor.ts'), 'tether', 'jquery', 'bootstrap', 'mdb'
+            helper.root('src', 'vendor.ts'), 'tether', 'jquery', 'bootstrap', 'mdb','picker', 'datepicker'
         ],
         'main' : helper.root('src','main.ts')
     },
@@ -72,7 +72,9 @@ module.exports = {
             'jquery': helper.root('node_modules', 'mdbootstrap/js/jquery-3.1.1'),
             'tether': helper.root('node_modules', 'mdbootstrap/js/tether.js'),
             'bootstrap': helper.root('node_modules', 'mdbootstrap/js/bootstrap.js'),
-            'mdb': helper.root('node_modules', 'mdbootstrap/js/mdb.js')
+            'mdb': helper.root('node_modules', 'mdbootstrap/js/mdb.js'),
+            'picker': helper.root('node_modules', 'mdbootstrap/js/picker.js'),
+            'datepicker':helper.root('node_modules', 'mdbootstrap/js/datepicker.js')
         }
     },
 

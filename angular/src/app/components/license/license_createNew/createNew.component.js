@@ -16,7 +16,6 @@ var core_1 = require("@angular/core");
 var user_service_1 = require("../../../services/user.service");
 var router_1 = require("@angular/router");
 var license_service_1 = require("../../../services/license.service");
-var sweetalert2_1 = require("sweetalert2");
 var CreateNewComponent = (function () {
     function CreateNewComponent(userService, router, licenseService) {
         this.userService = userService;
@@ -54,6 +53,16 @@ var CreateNewComponent = (function () {
     CreateNewComponent.prototype.ngDoCheck = function () {
     };
     CreateNewComponent.prototype.ngOnInit = function () {
+        jQuery('.datapicker').pickadate({
+            labelMonthNext: 'Go to the next month',
+            labelMonthPrev: 'Go to the previous month',
+            labelMonthSelect: 'Pick a month from the dropdown',
+            labelYearSelect: 'Pick a year from the dropdown',
+            selectMonths: true,
+            selectYears: true,
+            min: +1,
+            max: [2018, 0, 1]
+        });
     };
     CreateNewComponent.prototype.selectDevice = function (index) {
         console.log('selectDevice()');
@@ -68,6 +77,8 @@ var CreateNewComponent = (function () {
     //选择device界面的 确定 按钮事件
     CreateNewComponent.prototype.confirmDevices = function (deviceNumber) {
         console.log('deviceNumber = ' + deviceNumber);
+        //点击确定后，已选择设备数量清空
+        this.selectedDeviceNumber = 0;
         for (var _i = 0, _a = this.devices; _i < _a.length; _i++) {
             var device = _a[_i];
             if (device.selected) {
@@ -99,32 +110,34 @@ var CreateNewComponent = (function () {
         }
     };
     CreateNewComponent.prototype.createNewLicense = function (totalUserNumber, selectedDevices) {
-        var _this = this;
         console.info('createNewLicense()');
-        console.info('userId = ' + this.userService.user._id);
-        console.info('totalUserNumber = ' + totalUserNumber);
+        // console.info('userId = ' + this.userService.user._id);
+        console.info('totalUserNumber = ' + new Date(totalUserNumber).getTime());
         console.info('BundleIdOrPackageName = ' + JSON.stringify(selectedDevices));
-        this.licenseService.createNewLicense({
-            "userId": this.userService.user._id,
-            "totalUserNumber": totalUserNumber,
-            "selectedDevices": selectedDevices
-        })
-            .then(function (res) {
-            console.info('res = ' + JSON.stringify(res));
-            //保存成功，跳转到管理界面
-            //保存成功，跳转到管理界面
-            _this.router.navigate(['/manager-license']);
-            sweetalert2_1.default({
-                position: 'bottom-right',
-                type: 'success',
-                title: 'Add new license successfully',
-                showConfirmButton: false,
-                timer: 2000
-            }).catch(sweetalert2_1.default.noop);
-        })
-            .catch(function (err) {
-            console.info('error = ' + err);
-        });
+        // this.licenseService.createNewLicense({
+        //     "userId": this.userService.user._id,
+        //     "totalUserNumber": totalUserNumber,
+        //     "selectedDevices": selectedDevices
+        //
+        // })
+        //     .then(res => {
+        //         console.info('res = ' + JSON.stringify(res));
+        //         //保存成功，跳转到管理界面
+        //         //保存成功，跳转到管理界面
+        //         this.router.navigate(['/manager-license']);
+        //
+        //         swal({
+        //             position: 'bottom-right',
+        //             type: 'success',
+        //             title: 'Add new license successfully',
+        //             showConfirmButton: false,
+        //             timer: 2000
+        //         }).catch(swal.noop)
+        //
+        //     })
+        //     .catch(err => {
+        //         console.info('error = ' + err);
+        //     })
     };
     return CreateNewComponent;
 }());

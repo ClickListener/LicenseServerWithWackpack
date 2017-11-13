@@ -62,3 +62,18 @@ position: relative;
     display: flex;
     flex-wrap:wrap;
 }
+
+.card-body {
+    padding: 10px;
+}
+
+/*让文本上下居中*/
+.card-header div h4 {
+    padding: 10px;
+    margin: 0px;
+}
+
+/*设置总标题的外边距*/
+.container div h1 {
+    margin: 100px 0px 50px 0px;
+}
