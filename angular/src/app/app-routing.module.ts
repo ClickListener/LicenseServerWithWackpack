@@ -37,7 +37,7 @@ const routes : Routes = [
         component: CreateNewComponent
     },
     {
-        path: 'modify-license',
+        path: 'modify-license/:licenseId',
         component: ModifyComponent
     }
 ];

@@ -23,8 +23,6 @@ export class LicenseService {
 
     licenses:License[];
 
-    license:License;
-
     url = '/license';
 
 
@@ -55,13 +53,15 @@ export class LicenseService {
 
     /**
      * 更新 License
-     * @param licenseInfo
+     * @param message
      * @returns {Promise<License[]>}
      */
-    updateLicense(licenseInfo:any) : Promise<License[]> {
-        console.info("licenseInfo = " + JSON.stringify(licenseInfo));
+    updateLicense(message:any) : Promise<License[]> {
+        console.info("message = " + JSON.stringify(message));
 
-        return this.http.post(this.url, JSON.stringify(licenseInfo), this.header)
+        let url = this.url + '/' + message.licenseId;
+
+        return this.http.post(url, JSON.stringify(message.licenseInfo), this.header)
             .toPromise()
             .then(res => {
                 this.licenses = res.json().licenses as License[];

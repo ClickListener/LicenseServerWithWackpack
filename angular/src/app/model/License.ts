@@ -6,7 +6,6 @@ export class License {
 
     _id:string;
     installedPhoneNumber:number;
-    totalUserNumber:number;
-    BundleIdOrPackageName:string;
+    expired_ts:number;
     devices: Device[];
 }

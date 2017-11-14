@@ -15,9 +15,9 @@ const User = require('../model/User');
 router.put('/', function (req, res, next) {
     console.log('licenseService');
     console.log('req = ' + req.body.userId);
-    console.log('req = ' + req.body.installedPhoneNumber);
-    console.log('req = ' + req.body.totalUserNumber);
-    console.log('req = ' + req.body.BundleIdOrPackageName);
+    console.log('req = ' + req.body.license.licenseType);
+    console.log('req = ' + req.body.license.expired_ts);
+    console.log('req = ' + req.body.license.devices);
 
     //通过userId在User表中找到对应的User, 失败返回450
     User.findById(req.body.userId, function (error, user) {
@@ -31,9 +31,9 @@ router.put('/', function (req, res, next) {
         if (user) {
             const license = new License();
             license.userId = user._id;
-            license.installedPhoneNumber = req.body.installedPhoneNumber;
-            license.totalUserNumber = req.body.totalUserNumber;
-            license.BundleIdOrPackageName = req.body.BundleIdOrPackageName;
+            license.licenseType = req.body.license.licenseType;
+            license.expired_ts = req.body.license.expired_ts;
+            license.devices = req.body.license.devices;
 
             //保存license，失败返回451
             license.save(function (error) {
@@ -60,13 +60,12 @@ router.put('/', function (req, res, next) {
 
 
 //更新License
-router.post('/', function (req, res) {
+router.post('/:licenseId', function (req, res) {
     console.log('licenseService');
+    console.log('licenseId = ' + req.params.licenseId);
     console.log('req = ' + req.body.userId);
-    console.log('req = ' + req.body.licenseId);
-    console.log('req = ' + req.body.installedPhoneNumber);
-    console.log('req = ' + req.body.totalUserNumber);
-    console.log('req = ' + req.body.BundleIdOrPackageName);
+    console.log('req = ' + JSON.stringify(req.body.license.devices));
+    console.log('req = ' + req.body.license.expired_ts);
 
     //通过userId在User表中找到对应的User, 失败返回450
     User.findById(req.body.userId, function (error, user) {
@@ -78,7 +77,7 @@ router.post('/', function (req, res) {
 
         //在License表中查找对应的license，失败返回450
         if (user) {
-            License.findById(req.body.licenseId, function (error, license) {
+            License.findById(req.params.licenseId, function (error, license) {
                 if (error) {
                     return res.status(450).send({
                         message: JSON.stringify(error)
@@ -86,10 +85,8 @@ router.post('/', function (req, res) {
                 }
                 //更新返回的license字段
                 if (license) {
-                    license.installedPhoneNumber = req.body.installedPhoneNumber;
-                    license.totalUserNumber = req.body.totalUserNumber;
-                    license.BundleIdOrPackageName = req.body.BundleIdOrPackageName;
-
+                    license.expired_ts = req.body.license.expired_ts;
+                    license.devices = req.body.license.devices;
                     //保存，失败返回451
                     license.save(function (error, license) {
                         if (error) {

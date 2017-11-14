@@ -16,6 +16,7 @@ import {ManagerComponent} from "./components/license/license_manager/manager.com
 import {ModifyComponent} from "./components/license/license_modify/modify.component";
 import {LicenseService} from "./services/license.service";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import {DevicesService} from "./services/devices.service";
 
 @NgModule({
 
@@ -39,7 +40,7 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
     bootstrap:[AppComponent],
 
-    providers:[UserService, LicenseService]
+    providers:[UserService, LicenseService, DevicesService]
 })
 
 export class AppModule {}

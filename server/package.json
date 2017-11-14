@@ -4,6 +4,7 @@
   "description": "This is the server that built by Express and MongoDB.",
   "main": "index.js",
   "scripts": {
+    "build": "rimraf dist && cp -r ../angular/dist dist",
     "start": "rimraf dist && cp -r ../angular/dist dist && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

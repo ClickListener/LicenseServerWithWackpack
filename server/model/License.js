@@ -13,14 +13,18 @@ const licenseSchema = new Schema({
     updated: {
        type: Date
     },
+    licenseType: {
+      type: String
+    },
     licenseData: {
        type: Buffer
     },
     installedPhoneNumber: {
        type: Number
     },
-    totalUserNumber: {
-       type: Number
+
+    expired_ts: {
+       type:Number
     },
     BundleIdOrPackageName: {
        type: String

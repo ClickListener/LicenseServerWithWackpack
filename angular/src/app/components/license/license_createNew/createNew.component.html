@@ -36,7 +36,7 @@
                         <div *ngFor="let device of selectedDevices let i = index">
 
                             <div class="customBlock">
-                                <img src="/src/assets/images/device_{{device.deviceName}}.png"/>
+                                <img src="/../../../../assets/images/device_{{device.deviceName}}.png"/>
 
                                 <div>
                                     <p>DeviceModule: {{device.deviceName}}</p>
@@ -89,7 +89,8 @@
                                     <div *ngFor="let key of devices;let i = index;">
                                         <div class="device" *ngIf="key.selected && !key.out_select"
                                              (click)="cancelSelectDevice(i)">
-                                            <img src="/src/assets/images/device_{{key.deviceName}}.png" width="75">
+                                            <!--<img src="/src/assets/images/device_{{key.deviceName}}.png" width="75">-->
+                                            <img src="/../../../../assets/images/device_{{key.deviceName}}.png" width="75">
                                         </div>
                                     </div>
                                     <div *ngIf="selectedDeviceNumber === 0" class="align-content-lg-center">
@@ -102,7 +103,8 @@
                                     <div *ngFor="let key of devices;let i = index">
                                         <div class="device" *ngIf="!key.selected && !key.out_selected"
                                              (click)="selectDevice(i)">
-                                            <img src="/src/assets/images/device_{{key.deviceName}}.png" width="75">
+                                            <!--<img src="/src/assets/images/device_{{key.deviceName}}.png" width="75">-->
+                                            <img src="/../../../../assets/images/device_{{key.deviceName}}.png" width="75">
                                         </div>
                                     </div>
                                 </div>

@@ -42,7 +42,7 @@ var routes = [
         component: createNew_component_1.CreateNewComponent
     },
     {
-        path: 'modify-license',
+        path: 'modify-license/:licenseId',
         component: modify_component_1.ModifyComponent
     }
 ];

@@ -16,13 +16,13 @@ var core_1 = require("@angular/core");
 var user_service_1 = require("../../../services/user.service");
 var router_1 = require("@angular/router");
 var license_service_1 = require("../../../services/license.service");
-var License_1 = require("../../../model/License");
 var sweetalert2_1 = require("sweetalert2");
 var ManagerComponent = (function () {
     function ManagerComponent(userService, router, licenseService) {
         this.userService = userService;
         this.router = router;
         this.licenseService = licenseService;
+        this.licenses = [];
         this.licenses_fake = [
             {
                 "ExpiredDate": "2017-10-10",
@@ -80,18 +80,16 @@ var ManagerComponent = (function () {
     ManagerComponent.prototype.ngDoCheck = function () {
         this.licenses = this.licenseService.licenses;
         console.info("this.licenses = " + JSON.stringify(this.licenses));
+        if (this.licenses !== null) {
+            console.info("this.licenses.length = " + this.licenses.length);
+        }
     };
     ManagerComponent.prototype.createNewLicense = function () {
         this.router.navigate(['./create-newLicense']);
     };
-    ManagerComponent.prototype.modifyLicense = function (licenseId, installedPhoneNumber, totalUserNumber, BundleIdOrPackageName) {
-        var license = new License_1.License();
-        license._id = licenseId;
-        license.installedPhoneNumber = installedPhoneNumber;
-        license.totalUserNumber = totalUserNumber;
-        license.BundleIdOrPackageName = BundleIdOrPackageName;
-        this.licenseService.license = license;
-        this.router.navigate(['./modify-license']);
+    //修改License，跳转到修改界面
+    ManagerComponent.prototype.modifyLicense = function (licenseId) {
+        this.router.navigate(['./modify-license', licenseId]);
     };
     ManagerComponent.prototype.deleteLicense = function (licenseId) {
         console.log('deleteLicense()');

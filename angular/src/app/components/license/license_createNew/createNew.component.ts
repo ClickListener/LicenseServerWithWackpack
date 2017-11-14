@@ -1,13 +1,16 @@
 /**
  * Created by zhangxu on 2017/9/19.
  */
-import {Component, DoCheck, OnInit} from "@angular/core";
+import {Component, DoCheck, OnDestroy, OnInit} from "@angular/core";
 import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
 import {LicenseService} from "../../../services/license.service";
 
+
+
 import swal from 'sweetalert2';
 import {Device} from "../../../model/Device";
+import {DevicesService} from "../../../services/devices.service";
 
 declare let jQuery: any;
 
@@ -18,10 +21,12 @@ declare let jQuery: any;
     styleUrls: ['createNew.component.css']
 })
 
-export class CreateNewComponent implements OnInit, DoCheck {
+export class CreateNewComponent implements OnInit, OnDestroy{
 
-    ngDoCheck(): void {
+    ngOnDestroy(): void {
+        this.devicesService.revertDevice();
     }
+
 
     ngOnInit(): void {
         jQuery('.datapicker').pickadate({
@@ -36,36 +41,17 @@ export class CreateNewComponent implements OnInit, DoCheck {
         })
     }
 
-    constructor(private userService: UserService, private router: Router, private licenseService: LicenseService) {
+    constructor(private userService: UserService, private router: Router,
+                private licenseService: LicenseService, private devicesService:DevicesService) {
         console.log('createNew----------constructor()');
+
+        this.devices = devicesService.devices.slice(0);
 
     }
 
 
-    //总的Devices
-    devices = [
-        {
-            deviceName: 'bp3m',
-            selected: false,
-            out_selected: false
-        },
-        {
-            deviceName: 'bp3l',
-            selected: false,
-            out_selected: false
-
-        },
-        {
-            deviceName: 'bp5',
-            selected: false,
-            out_selected: false
-        },
-        {
-            deviceName: 'bp7',
-            selected: false,
-            out_selected: false
-        }
-    ];
+    //总的devices
+    devices:Array<any> = [];
 
     //主界面存放Devices的数组
     selectedDevices: Array<Device> = [];
@@ -134,36 +120,43 @@ export class CreateNewComponent implements OnInit, DoCheck {
     }
 
 
-    createNewLicense(totalUserNumber: string, selectedDevices: Device[]): void {
+    createNewLicense(expiredDate: string, selectedDevices: Device[]): void {
         console.info('createNewLicense()');
         // console.info('userId = ' + this.userService.user._id);
-        console.info('totalUserNumber = ' + new Date(totalUserNumber).getTime());
+        console.info('totalUserNumber = ' + new Date(expiredDate).getTime());
         console.info('BundleIdOrPackageName = ' + JSON.stringify(selectedDevices));
 
-        // this.licenseService.createNewLicense({
-        //     "userId": this.userService.user._id,
-        //     "totalUserNumber": totalUserNumber,
-        //     "selectedDevices": selectedDevices
-        //
-        // })
-        //     .then(res => {
-        //         console.info('res = ' + JSON.stringify(res));
-        //         //保存成功，跳转到管理界面
-        //         //保存成功，跳转到管理界面
-        //         this.router.navigate(['/manager-license']);
-        //
-        //         swal({
-        //             position: 'bottom-right',
-        //             type: 'success',
-        //             title: 'Add new license successfully',
-        //             showConfirmButton: false,
-        //             timer: 2000
-        //         }).catch(swal.noop)
-        //
-        //     })
-        //     .catch(err => {
-        //         console.info('error = ' + err);
-        //     })
+
+        let licenseInfo = {
+            userId : this.userService.user._id,
+            license : {
+                licenseType: this.userService.user.licenseType,
+                expired_ts: new Date(expiredDate).getTime(),
+                devices: selectedDevices
+            }
+        };
+
+
+
+        this.licenseService.createNewLicense(licenseInfo)
+            .then(res => {
+                console.info('res = ' + JSON.stringify(res));
+
+                //保存成功，跳转到管理界面
+                this.router.navigate(['/manager-license']);
+
+                swal({
+                    position: 'bottom-right',
+                    type: 'success',
+                    title: 'Add new license successfully',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).catch(swal.noop)
+
+            })
+            .catch(err => {
+                console.info('error = ' + err);
+            })
 
 
     }

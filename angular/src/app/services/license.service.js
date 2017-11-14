@@ -44,13 +44,14 @@ var LicenseService = LicenseService_1 = (function () {
     };
     /**
      * 更新 License
-     * @param licenseInfo
+     * @param message
      * @returns {Promise<License[]>}
      */
-    LicenseService.prototype.updateLicense = function (licenseInfo) {
+    LicenseService.prototype.updateLicense = function (message) {
         var _this = this;
-        console.info("licenseInfo = " + JSON.stringify(licenseInfo));
-        return this.http.post(this.url, JSON.stringify(licenseInfo), this.header)
+        console.info("message = " + JSON.stringify(message));
+        var url = this.url + '/' + message.licenseId;
+        return this.http.post(url, JSON.stringify(message.licenseInfo), this.header)
             .toPromise()
             .then(function (res) {
             _this.licenses = res.json().licenses;

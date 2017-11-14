@@ -4,6 +4,6 @@
 
 export class Device {
 
-    deviceName: string
-    deviceNumber: number
+    deviceName: string;
+    deviceNumber: number;
 }

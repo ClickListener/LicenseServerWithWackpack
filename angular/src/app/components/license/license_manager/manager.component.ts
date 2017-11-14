@@ -20,7 +20,7 @@ export class ManagerComponent implements OnInit, DoCheck {
 
 
     user: User;
-    licenses: License[];
+    licenses: Array<License> = [];
 
     licenses_fake = [
         {
@@ -87,6 +87,10 @@ export class ManagerComponent implements OnInit, DoCheck {
         this.licenses = this.licenseService.licenses;
 
         console.info("this.licenses = " + JSON.stringify(this.licenses));
+        if (this.licenses !== null) {
+
+            console.info("this.licenses.length = " + this.licenses.length);
+        }
 
     }
 
@@ -94,19 +98,10 @@ export class ManagerComponent implements OnInit, DoCheck {
         this.router.navigate(['./create-newLicense'])
     }
 
-    modifyLicense(licenseId: string, installedPhoneNumber: number, totalUserNumber: number, BundleIdOrPackageName: string): void {
+    //修改License，跳转到修改界面
+    modifyLicense(licenseId: string): void {
 
-
-        let license = new License();
-
-        license._id = licenseId;
-        license.installedPhoneNumber = installedPhoneNumber;
-        license.totalUserNumber = totalUserNumber;
-        license.BundleIdOrPackageName = BundleIdOrPackageName;
-
-        this.licenseService.license = license;
-
-        this.router.navigate(['./modify-license']);
+        this.router.navigate(['./modify-license',licenseId]);
     }
 
     deleteLicense(licenseId: string): void {

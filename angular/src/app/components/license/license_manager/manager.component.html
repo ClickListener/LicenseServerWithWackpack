@@ -19,6 +19,8 @@
     <div class="accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
 
 
+    <div *ngIf="licenses !== null && licenses.length !== 0">
+
         <div class="container">
             <div class="row">
                 <div class="col-4 text-center">
@@ -40,7 +42,7 @@
 
 
             <!-- Accordion card -->
-            <div class="card" *ngFor="let license of licenses_fake; let i = index">
+            <div class="card" *ngFor="let license of licenses; let i = index">
 
                 <!-- Card header -->
                 <div class="card-header" role="tab" id="headingOne">
@@ -48,16 +50,17 @@
                        arrt.aria-expanded="false">
                         <div class="row">
                             <div class="col-4 text-center">
-                                {{license.ExpiredDate}}
+                                {{license.expired_ts | date:"MM/dd/yyyy"}}
                             </div>
                             <div class="col-2 text-center">
-                                {{license.DeviceInfo.length}}
+                                {{license.devices.length}}
                             </div>
                             <div class="col-2 text-center">
                                 {{license.InstalledPhoneNumber}}
                             </div>
                             <div class="col-4 text-center">
-                                <button>删除</button>
+                                <button class="btn btn-primary" (click)="modifyLicense(license._id)">更新</button>
+                                <button class="btn badge-danger" (click)="deleteLicense(license._id)">删除</button>
                             </div>
                             <i class="fa fa-angle-down rotate-icon" ></i>
                         </div>
@@ -80,12 +83,12 @@
                             </div>
                         </div>
 
-                        <div class="row" *ngFor="let device of license.DeviceInfo">
+                        <div class="row" *ngFor="let device of license.devices">
                             <div class="col-4 text-center">
-                                <b>{{device.DeviceModel}}</b>
+                                <b>{{device.deviceName}}</b>
                             </div>
                             <div class="col-4 text-center">
-                                <b>{{device.DeviceTotalNumber}}</b>
+                                <b>{{device.deviceNumber}}</b>
                             </div>
                             <div class="col-4 text-center">
                                 <b>{{device.DeviceUsedNumber}}</b>
@@ -100,6 +103,7 @@
         </div>
 
         <!-- Accordion card -->
+    </div>
 
     </div>
     <!--/.Accordion wrapper-->
